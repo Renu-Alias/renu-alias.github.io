@@ -46,13 +46,16 @@ export default function Terminal({ profileData, onNavigate, onContactClick }) {
 [STATUS]: Open_to_Collaborate
 [PRIMARY_STACK]: Rust, TypeScript, Go
 
-BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing and building high-performance systems. Focused on code purity, architectural integrity, and creating tools that empower other developers.
+BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing and building high-performance systems.
 
 [EDUCATION]:
-  - Central Board of Secondary Education (CBSE) (2010 - 2024)
-    Schooling (PCM) - Focus on science stream with Physics, Chemistry, and Mathematics (PCM).
-  - APJ Abdul Kalam Technological University (KTU) (2024 - 2028)
-    BTech in Computer Science - Specializing in software systems, algorithms, and full-stack computing.`;
+  - Bachelor of Technology (B.Tech) in Computer Science & Engineering
+    2024 – 2028
+    APJ Abdul Kalam Technological University (KTU)
+  - Higher Secondary Education (Science Stream – PCM)
+    2022 – 2024
+    Central Board of Secondary Education (CBSE)
+    Physics • Chemistry • Mathematics`;
       } else if (cmdLower === 'projects') {
         reply = `00. [PROJECT_OMNITHREAD] -> High-Concurrency Data Engine
     A custom runtime built in Rust to handle millions of simultaneous websocket connections.
@@ -126,7 +129,7 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
           </div>
 
           <p className="term-bio">
-            {profileData?.bio || "AI Automation Engineer and Full-Stack Architect with expertise in designing and building high-performance systems. Focused on code purity, architectural integrity, and creating tools that empower other developers."}
+            {profileData?.bio || "AI Automation Engineer and Full-Stack Architect with expertise in designing and building high-performance systems."}
           </p>
 
           <div className="term-grid">
@@ -149,11 +152,13 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
               <span className="term-label">[EDUCATION]:</span>
               <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '13px', lineHeight: '1.5' }}>
                 {profileData.education.map((edu, idx) => (
-                  <div key={idx} style={{ marginBottom: '8px' }}>
-                    <div>• {edu.period}: {edu.institution}</div>
-                    <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>
-                      {edu.details.startsWith("Course") || edu.details === "PCM" ? edu.details : `Course: ${edu.details}`}
-                    </div>
+                  <div key={idx} style={{ marginBottom: '12px' }}>
+                    <div>• {edu.title}</div>
+                    <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>{edu.period}</div>
+                    <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>{edu.institution}</div>
+                    {edu.details && (
+                      <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>{edu.details}</div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -162,13 +167,16 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
             <div style={{ marginTop: '16px' }}>
               <span className="term-label">[EDUCATION]:</span>
               <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '13px', lineHeight: '1.5' }}>
-                <div style={{ marginBottom: '8px' }}>
-                  <div>• 2010-2024: Central Board of Secondary Education (CBSE)</div>
-                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>PCM</div>
+                <div style={{ marginBottom: '12px' }}>
+                  <div>• Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
+                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>2024 – 2028</div>
+                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>APJ Abdul Kalam Technological University (KTU)</div>
                 </div>
-                <div style={{ marginBottom: '8px' }}>
-                  <div>• 2024-2028: APJ Abdul Kalam Technological University (KTU)</div>
-                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>Course: BTech Computer Science</div>
+                <div style={{ marginBottom: '12px' }}>
+                  <div>• Higher Secondary Education (Science Stream – PCM)</div>
+                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>2022 – 2024</div>
+                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>Central Board of Secondary Education (CBSE)</div>
+                  <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>Physics • Chemistry • Mathematics</div>
                 </div>
               </div>
             </div>
