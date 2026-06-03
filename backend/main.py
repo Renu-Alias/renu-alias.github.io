@@ -8,7 +8,7 @@ from datetime import datetime
 
 app = FastAPI(
     title="Dev Portfolio API",
-    description="Backend services for Renu developer portfolio",
+    description="Backend services for Renu Alias' developer portfolio",
     version="1.0.4"
 )
 
