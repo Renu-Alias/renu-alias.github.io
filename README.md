@@ -129,8 +129,3 @@ npm run build
 **Renu Alias**
 - **Location**: Kochi, Kerala, India
 - **Status**: Open to Collaborate
-- **Specializations**: System Engineering & Full-Stack Architecture
-
-### Education
-- **Central Board of Secondary Education (CBSE) (2010 - 2024)**: PCM (Physics, Chemistry, Mathematics)
-- **APJ Abdul Kalam Technological University (KTU) (2024 - 2028)**: BTech Computer Science
