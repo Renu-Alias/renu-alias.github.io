@@ -56,7 +56,7 @@ def get_projects():
                 "dashboard for real-time monitoring."
             ),
             "tags": ["Rust", "Tokio", "gRPC"],
-            "url": "https://github.com/alexreed/omnithread"
+            "url": "https://github.com/renualias/omnithread"
         },
         {
             "id": "01",
@@ -67,7 +67,7 @@ def get_projects():
                 "with built-in command palette."
             ),
             "tags": ["React", "TypeScript", "Monospace"],
-            "url": "https://github.com/alexreed/terminal-ui"
+            "url": "https://github.com/renualias/terminal-ui"
         }
     ]
 

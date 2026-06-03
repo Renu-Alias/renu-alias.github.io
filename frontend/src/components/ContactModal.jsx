@@ -49,7 +49,7 @@ export default function ContactModal({ isOpen, onClose }) {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <h3 className="modal-title">ssh://alex_reed@contact</h3>
+          <h3 className="modal-title">ssh://renu_alias@contact</h3>
           <span style={{ cursor: 'pointer', color: 'var(--text-muted)' }} onClick={onClose}>[X]</span>
         </div>
 
