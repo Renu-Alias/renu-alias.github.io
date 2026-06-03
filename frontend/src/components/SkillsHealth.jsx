@@ -7,7 +7,8 @@ export default function SkillsHealth({ skillsData, healthData }) {
     frameworks: ["Flutter", "Node.js", "Express.js"],
     "tools_&_design": ["Linux", "Git", "GitHub", "Canva", "Figma"],
     infrastructure: ["AWS", "Claude"],
-    databases: ["PostgreSQL", "Redis", "MySQL", "SQLite", "MongoDB"]
+    databases: ["PostgreSQL", "Redis", "MySQL", "SQLite", "MongoDB"],
+    soft_skills: ["leadership", "collaboration", "adaptability", "problem-solving"]
   };
 
   const health = healthData || {
@@ -66,6 +67,18 @@ export default function SkillsHealth({ skillsData, healthData }) {
             <div className="skill-title">.databases</div>
             <div className="skill-list">
               {JSON.stringify(skills.databases)}
+            </div>
+          </div>
+        </div>
+
+        <div className="soft-skills-section">
+          <div className="soft-skills-header">Soft Skills</div>
+          <div className="skill-card soft-skills-card">
+            <div className="skill-title">.soft_skills</div>
+            <div className="skill-list soft-skills-list">
+              {(skills.soft_skills || []).map((skill) => (
+                <span key={skill} className="soft-skill-tag">{skill}</span>
+              ))}
             </div>
           </div>
         </div>

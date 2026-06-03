@@ -91,8 +91,8 @@ def get_skills():
         "frameworks": ["Flutter","Node.js","Express.js"],
         "tools_&_design":["Linux","Git","GitHub","Canva","Figma"],
         "infrastructure": ["AWS","Claude"],
-        "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"]
-        #"protocols": ["gRPC", "HTTP/3", "WebSocket", "MQTT"]
+        "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"],
+        "soft_skills": ["leadership", "collaboration", "adaptability", "problem-solving"]
     }
 
 @app.get("/api/health")

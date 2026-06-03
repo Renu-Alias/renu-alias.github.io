@@ -3,13 +3,14 @@ import React, { useState, useEffect, useRef } from 'react';
 export default function Terminal({ profileData, onNavigate, onContactClick }) {
   const [history, setHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const terminalEndRef = useRef(null);
+  const terminalScrollRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Auto-scroll terminal logs to bottom
+  // Scroll only within the terminal shell, not the whole page
   useEffect(() => {
-    if (terminalEndRef.current) {
-      terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    const scrollEl = terminalScrollRef.current;
+    if (scrollEl) {
+      scrollEl.scrollTop = scrollEl.scrollHeight;
     }
   }, [history]);
 
@@ -21,6 +22,7 @@ export default function Terminal({ profileData, onNavigate, onContactClick }) {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
       const cmd = inputValue.trim();
       if (!cmd) return;
 
@@ -70,7 +72,8 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
   "frameworks": ["Flutter","Node.js","Express.js"],
   "tools_&_design":["Linux","Git","GitHub","Canva","Figma"],
   "infrastructure": ["AWS","Claude"],
-  "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"]
+  "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"],
+  "soft_skills": ["leadership", "collaboration", "adaptability", "problem-solving"]
 }`;
       } else if (cmdLower === 'contact') {
         reply = `Redirecting shell to secure messaging module...`;
@@ -182,47 +185,48 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
             </div>
           )}
 
-          {/* Terminal History */}
-          <div style={{ marginTop: '12px' }}>
-            {history.map((log, idx) => (
-              <div
-                key={idx}
-                className={log.type === 'input' ? 'term-prompt-line' : 'term-output-line'}
-                style={log.type === 'input' ? { marginTop: '8px' } : {}}
-              >
-                {log.type === 'input' ? (
-                  <>
-                    <span className="term-arrow">➜</span>
-                    <span className="term-path">~/portfolio</span>
-                    <span className="term-cmd">{log.text.replace('➜ ~/portfolio ', '')}</span>
-                  </>
-                ) : (
-                  <pre style={{ fontFamily: 'inherit', whiteSpace: 'pre-wrap' }}>{log.text}</pre>
-                )}
-              </div>
-            ))}
-            <div ref={terminalEndRef} />
-          </div>
+          <div className="terminal-shell-scroll" ref={terminalScrollRef}>
+            {/* Terminal History */}
+            <div className="terminal-history">
+              {history.map((log, idx) => (
+                <div
+                  key={idx}
+                  className={log.type === 'input' ? 'term-prompt-line' : 'term-output-line'}
+                  style={log.type === 'input' ? { marginTop: '8px' } : {}}
+                >
+                  {log.type === 'input' ? (
+                    <>
+                      <span className="term-arrow">➜</span>
+                      <span className="term-path">~/portfolio</span>
+                      <span className="term-cmd">{log.text.replace('➜ ~/portfolio ', '')}</span>
+                    </>
+                  ) : (
+                    <pre style={{ fontFamily: 'inherit', whiteSpace: 'pre-wrap' }}>{log.text}</pre>
+                  )}
+                </div>
+              ))}
+            </div>
 
-          {/* Dynamic input cursor line */}
-          <div className="cursor-line">
-            <span className="term-arrow">➜</span>
-            <span className="term-path">~/portfolio</span>
-            <input
-              ref={inputRef}
-              type="text"
-              className="term-input"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              autoFocus
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              placeholder="type 'help' for commands..."
-            />
-            <span className="term-cursor" style={{ display: inputValue ? 'none' : 'inline-block' }}></span>
+            {/* Dynamic input cursor line */}
+            <div className="cursor-line">
+              <span className="term-arrow">➜</span>
+              <span className="term-path">~/portfolio</span>
+              <input
+                ref={inputRef}
+                type="text"
+                className="term-input"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                autoFocus
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                placeholder="type 'help' for commands..."
+              />
+              <span className="term-cursor" style={{ display: inputValue ? 'none' : 'inline-block' }}></span>
+            </div>
           </div>
         </div>
       </div>
