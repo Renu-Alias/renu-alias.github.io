@@ -57,10 +57,11 @@ BIO: System Engineer & Full-Stack Architect specialized in building high-perform
     Tech: React, TypeScript, Monospace`;
       } else if (cmdLower === 'skills') {
         reply = `{
-  "languages": ["Rust", "Go", "C++", "TypeScript", "Python"],
-  "infrastructure": ["Kubernetes", "Docker", "Terraform", "AWS"],
-  "databases": ["PostgreSQL", "Redis", "Elasticsearch", "ClickHouse"],
-  "protocols": ["gRPC", "HTTP/3", "WebSocket", "MQTT"]
+  "languages": ["Python", "C", "C++", "JavaScript", "Java","Dart"],
+  "frameworks": ["Flutter","Node.js","Express.js"],
+  "tools_&_design":["Linux","Git","GitHub","Canva","Figma"],
+  "infrastructure": ["AWS"],
+  "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"]
 }`;
       } else if (cmdLower === 'contact') {
         reply = `Redirecting shell to secure messaging module...`;
