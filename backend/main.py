@@ -75,6 +75,8 @@ def get_projects():
 def get_skills():
     return {
         "languages": ["Python", "C", "C++", "JavaScript", "Java","Dart"],
+        "frameworks": ["Flutter","Node.js","Express.js"],
+        "tools_&_design":["Linux","Git","GitHub","Canva","Figma"],
         "infrastructure": ["AWS"],
         "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"],
         #"protocols": ["gRPC", "HTTP/3", "WebSocket", "MQTT"]
