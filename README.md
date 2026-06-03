@@ -8,7 +8,7 @@ A high-fidelity, interactive developer portfolio styled as a retro, hardware-ins
   | O |     OS: RustOS x86_64
    \=/      Kernel: 5.14.0-custom-concurrency
   /   \     Uptime: 456 days, 2 hours, 12 mins
- //| |\    Shell: zsh 5.8
+ //| |\     Shell: zsh 5.8
 // |_| \\   Resolution: 1920x1080 (CRT Mode)
             Terminal: Terminal-UI Kit v1.0.4
             CPU: Threadripper 3990X (128) @ 2.9GHz
