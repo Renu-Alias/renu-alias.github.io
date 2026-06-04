@@ -164,7 +164,7 @@ body {
   border: 1px solid var(--accent-green);
   color: var(--accent-green);
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -691,14 +691,14 @@ body {
 }
 
 .skill-title {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--accent-green);
   margin-bottom: 10px;
   font-weight: 600;
 }
 
 .skill-list {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-muted);
   line-height: 1.8;
 }
@@ -821,7 +821,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
 }
 
