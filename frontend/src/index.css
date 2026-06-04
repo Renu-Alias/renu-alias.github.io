@@ -1054,10 +1054,6 @@ body {
   gap: 14px;
   font-size: 16px; /* increased body text size */
 }
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
 
 .form-group {
   display: flex;
