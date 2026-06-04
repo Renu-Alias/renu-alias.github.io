@@ -72,7 +72,7 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
   "frameworks": ["Flutter","Node.js","Express.js"],
   "tools_&_design":["Linux","Git","GitHub","Canva","Figma"],
   "infrastructure": ["AWS","Claude"],
-  "databases": ["PostgreSQL", "Redis", "MySQL","SQLite","MongoDB"],
+  "databases": ["PostgreSQL", "SQL*Plus", "MySQL","MongoDB"],
   "soft_skills": ["leadership", "collaboration", "adaptability", "problem-solving"]
 }`;
       } else if (cmdLower === 'contact') {
