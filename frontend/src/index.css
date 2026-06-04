@@ -1031,6 +1031,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  font-size: 18px; /* increased base font size */
 }
 
 .modal-header {
@@ -1042,12 +1043,17 @@ body {
 }
 
 .modal-title {
-  font-size: 14px;
+  font-size: 20px; /* increased title size */
   font-weight: 700;
   color: var(--accent-green);
 }
 
 .modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 16px; /* increased body text size */
+}
   display: flex;
   flex-direction: column;
   gap: 14px;
