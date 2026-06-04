@@ -4,6 +4,7 @@ import profilePhoto from '../assets/me.jpeg';
 export default function Terminal({ profileData, onNavigate, onContactClick }) {
   const [history, setHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const terminalScrollRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -120,9 +121,19 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
         {/* Live Feed Silhouette Avatar */}
         <div className="terminal-feed-col">
           <div className="live-feed-box">
-            <img className="feed-photo" src={profilePhoto} alt="Renu Alias profile" />
-            <div className="live-feed-label">LIVE_FEED</div>
+            <button
+              className="feed-photo-button"
+              type="button"
+              aria-label="View profile picture"
+              onClick={(event) => {
+                event.stopPropagation();
+                setIsPhotoOpen(true);
+              }}
+            >
+              <img className="feed-photo" src={profilePhoto} alt="Renu Alias profile" />
+            </button>
           </div>
+          <div className="live-feed-label">LIVE_FEED</div>
         </div>
 
         {/* Console logs and Command Prompt */}
@@ -232,6 +243,37 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
           </div>
         </div>
       </div>
+
+      {isPhotoOpen && (
+        <div
+          className="photo-viewer-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Profile picture viewer"
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsPhotoOpen(false);
+          }}
+        >
+          <button
+            className="photo-viewer-close"
+            type="button"
+            aria-label="Close profile picture viewer"
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsPhotoOpen(false);
+            }}
+          >
+            ×
+          </button>
+          <img
+            className="photo-viewer-image"
+            src={profilePhoto}
+            alt="Renu Alias profile enlarged"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
