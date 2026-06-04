@@ -224,6 +224,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
+  font-size: 16px;
 }
 
 .nav-links {
@@ -235,7 +236,7 @@ body {
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
   transition: var(--transition-fast);
 }
@@ -328,12 +329,12 @@ body {
 /* Terminal Live Feed Column */
 .terminal-feed-col {
   flex-shrink: 0;
-  width: 130px;
+  width: 160px;
 }
 
 .live-feed-box {
-  width: 130px;
-  height: 130px;
+  width: 160px;
+  height: 160px;
   border: 1px solid var(--accent-green-border);
   position: relative;
   background-color: rgba(0, 255, 102, 0.02);
@@ -366,8 +367,8 @@ body {
 }
 
 .feed-svg {
-  width: 70px;
-  height: 70px;
+  width: 90px;
+  height: 90px;
   color: rgba(0, 255, 102, 0.35);
   filter: drop-shadow(0 0 2px rgba(0, 255, 102, 0.2));
 }
@@ -377,7 +378,7 @@ body {
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--accent-green);
   letter-spacing: 0.1em;
@@ -690,14 +691,14 @@ body {
 }
 
 .skill-title {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--accent-green);
   margin-bottom: 10px;
   font-weight: 600;
 }
 
 .skill-list {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.8;
 }

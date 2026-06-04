@@ -147,7 +147,7 @@ function App() {
             </li>
           </ul>
           <div style={{ cursor: 'pointer', padding: '0 20px' }} title="Contact" onClick={() => setIsContactOpen(true)}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--accent-orange)' }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--accent-orange)' }}>
               <rect x="2" y="4" width="20" height="16" rx="2" />
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
@@ -178,29 +178,8 @@ function App() {
         {/* Footer info bars */}
         <footer className="footer">
           <div className="footer-left">
-            <span>© 2024 DEV_PORTFOLIO | build: 7f3a1c9</span>
+            <span>© 2026 DEV_PORTFOLIO | build: 7f3a1c9</span>
             <span className="footer-time">Local time: {currentTime || "00:00:00"}</span>
-          </div>
-
-          <div className="footer-right">
-            <span className="footer-link" onClick={() => handleNavigation('certifications')}>certifications</span>
-            <span className="footer-link" onClick={() => handleNavigation('skills')}>system_status</span>
-            <a
-              href="http://localhost:8000/docs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-link"
-              onClick={(e) => {
-                // If backend is not accessible on localhost (no port 8000 running in front), prevent error
-                fetch('http://localhost:8000/docs', { mode: 'no-cors' })
-                  .catch(() => {
-                    e.preventDefault();
-                    alert("FastAPI backend documentation is only accessible when the Python server is running on localhost:8000. Open the docs link once main.py is launched.");
-                  });
-              }}
-            >
-              api_docs
-            </a>
           </div>
         </footer>
       </div>
