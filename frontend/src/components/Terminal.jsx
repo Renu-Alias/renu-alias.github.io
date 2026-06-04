@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import profilePhoto from '../assets/me.jpeg';
 
+const GITHUB_URL = 'https://github.com/Renu-Alias';
+const LINKEDIN_URL = 'https://linkedin.com/in/renu-alias-0022a2329/';
+
 export default function Terminal({ profileData, onNavigate, onContactClick }) {
   const [history, setHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -49,6 +52,8 @@ export default function Terminal({ profileData, onNavigate, onContactClick }) {
 [LOCATION]: Kochi, Kerala, India
 [STATUS]: Open_to_Collaborate
 [PRIMARY_STACK]: Rust, TypeScript, Go
+[GITHUB]: ${GITHUB_URL}
+[LINKEDIN]: ${LINKEDIN_URL}
 
 BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing and building high-performance systems.
 
@@ -160,6 +165,30 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
             </div>
             <div className="term-grid-item">
               <span className="term-label">[PRIMARY_STACK]:</span> <span className="term-val">{profileData?.primary_stack || ["Python", "C", "JavaScript", "Java"]}</span>
+            </div>
+            <div className="term-grid-item">
+              <span className="term-label">[GITHUB]:</span>{' '}
+              <a
+                className="term-val term-link"
+                href={profileData?.github || GITHUB_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(event) => event.stopPropagation()}
+              >
+                Renu-Alias
+              </a>
+            </div>
+            <div className="term-grid-item">
+              <span className="term-label">[LINKEDIN]:</span>{' '}
+              <a
+                className="term-val term-link"
+                href={profileData?.linkedin || LINKEDIN_URL}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(event) => event.stopPropagation()}
+              >
+                renu-alias
+              </a>
             </div>
           </div>
 
