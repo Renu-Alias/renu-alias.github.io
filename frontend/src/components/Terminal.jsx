@@ -157,7 +157,7 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
           {profileData?.education ? (
             <div style={{ marginTop: '16px' }}>
               <span className="term-label">[EDUCATION]:</span>
-              <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '13px', lineHeight: '1.5' }}>
+              <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '14px', lineHeight: '1.5' }}>
                 {profileData.education.map((edu, idx) => (
                   <div key={idx} style={{ marginBottom: '12px' }}>
                     <div>• {edu.title}</div>
@@ -173,7 +173,7 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
           ) : (
             <div style={{ marginTop: '16px' }}>
               <span className="term-label">[EDUCATION]:</span>
-              <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '13px', lineHeight: '1.5' }}>
+              <div style={{ marginLeft: '12px', marginTop: '6px', fontSize: '14px', lineHeight: '1.5' }}>
                 <div style={{ marginBottom: '12px' }}>
                   <div>• Bachelor of Technology (B.Tech) in Computer Science & Engineering</div>
                   <div style={{ marginLeft: '12px', color: 'var(--text-muted)' }}>2024 – 2028</div>
