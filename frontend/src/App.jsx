@@ -6,6 +6,7 @@ import Certifications from './components/Certifications';
 import SkillsHealth from './components/SkillsHealth';
 import GitPushOverlay from './components/GitPushOverlay';
 import ContactModal from './components/ContactModal';
+import API_BASE_URL from './config';
 
 function App() {
   const [activeSection, setActiveSection] = useState('whoami');
@@ -24,19 +25,19 @@ function App() {
   // Fetch initial profile/skills/projects info
   useEffect(() => {
     // 1. Profile info
-    fetch('/api/profile')
+    fetch(`${API_BASE_URL}/api/profile`)
       .then(res => res.json())
       .then(data => setProfileData(data))
       .catch(err => console.error("Profile API unreachable, using default. Details: ", err));
 
     // 2. Projects info
-    fetch('/api/projects')
+    fetch(`${API_BASE_URL}/api/projects`)
       .then(res => res.json())
       .then(data => setProjectsData(data))
       .catch(err => console.error("Projects API unreachable. Details: ", err));
 
     // 3. Skills info
-    fetch('/api/skills')
+    fetch(`${API_BASE_URL}/api/skills`)
       .then(res => res.json())
       .then(data => setSkillsData(data))
       .catch(err => console.error("Skills API unreachable. Details: ", err));

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import API_BASE_URL from '../config';
 
 export default function GitPushOverlay({ isOpen, onClose }) {
   const [logs, setLogs] = useState([]);
@@ -33,7 +34,7 @@ export default function GitPushOverlay({ isOpen, onClose }) {
       return;
     }
 
-    fetch('/api/git-push-logs')
+    fetch(`${API_BASE_URL}/api/git-push-logs`)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) {

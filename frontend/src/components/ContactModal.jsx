@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from '../config';
 
 const AUTHOR_EMAIL = 'renualiasmeleth@gmail.com';
 
@@ -50,7 +51,7 @@ export default function ContactModal({ isOpen, onClose }) {
     const payload = { ...formData };
 
     try {
-      const apiRes = await fetch('/api/contact', {
+      const apiRes = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

@@ -22,10 +22,18 @@ app = FastAPI(
     version="1.0.4"
 )
 
-# Allow CORS for local development
+# Allow CORS for local development and production (Netlify + Render)
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://portfolio-bj06.onrender.com",
+    # Add your Netlify URL below before deploying:
+    # "https://your-site.netlify.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, restrict this. For local development, allow all.
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
