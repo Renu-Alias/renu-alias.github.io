@@ -609,6 +609,10 @@ body {
 .card-arrow {
   color: var(--accent-green);
   transition: var(--transition-normal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .project-card:hover .card-arrow {
