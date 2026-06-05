@@ -129,18 +129,19 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
       <div className="terminal-body">
         {/* Live Feed Silhouette Avatar */}
         <div className="terminal-feed-col">
-          <button
-            className="live-feed-box"
-            type="button"
-            aria-label="View profile picture"
-            onClick={(event) => {
-              event.stopPropagation();
-              setIsPhotoOpen(true);
-            }}
-            style={{ backgroundImage: `url(${profilePhoto})` }}
-          >
-            <div className="live-feed-corners"></div>
-          </button>
+          <div className="live-feed-box">
+            <button
+              className="feed-photo-btn"
+              type="button"
+              aria-label="View profile picture"
+              onClick={(event) => {
+                event.stopPropagation();
+                setIsPhotoOpen(true);
+              }}
+            >
+              <img className="feed-photo-img" src={profilePhoto} alt="Renu Alias profile" />
+            </button>
+          </div>
           <div className="live-feed-label">LIVE_FEED</div>
         </div>
 
