@@ -168,7 +168,7 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
               <span className="term-label">[STATUS]:</span> <span className="term-val" style={{ color: 'var(--accent-green)' }}>{profileData?.status || "Open_to_Collaborate"}</span>
             </div>
             <div className="term-grid-item">
-              <span className="term-label">[PRIMARY_STACK]:</span> <span className="term-val">{profileData?.primary_stack || ["Python", "C", "JavaScript", "Java"]}</span>
+              <span className="term-label">[PRIMARY_STACK]:</span> <span className="term-val">{Array.isArray(profileData?.primary_stack) ? profileData.primary_stack.join(", ") : (profileData?.primary_stack || "Python, JavaScript, C, Java")}</span>
             </div>
             <div className="term-grid-item">
               <span className="term-label">[GITHUB]:</span>{' '}
