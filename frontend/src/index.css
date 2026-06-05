@@ -252,6 +252,13 @@ body {
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
 }
 
+.nav-contact-icon {
+  cursor: pointer;
+  padding: 0 20px;
+  transform: translateY(3px);
+  color: var(--accent-orange);
+}
+
 /* Workspace Panels */
 .workspace {
   padding: 32px;
@@ -346,14 +353,23 @@ body {
   height: 190px;
   border: 1px solid var(--accent-green-border);
   position: relative;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: var(--bg-primary);
+  cursor: zoom-in;
+  display: block;
+  padding: 0;
+  font-family: inherit;
 }
 
-.live-feed-box::before {
+.live-feed-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.live-feed-corners::before {
   content: '';
   position: absolute;
   top: 4px;
@@ -364,7 +380,7 @@ body {
   border-left: 1px solid var(--accent-green);
 }
 
-.live-feed-box::after {
+.live-feed-corners::after {
   content: '';
   position: absolute;
   bottom: 4px;
@@ -375,28 +391,6 @@ body {
   border-right: 1px solid var(--accent-green);
 }
 
-.feed-svg {
-  width: 90px;
-  height: 90px;
-  color: rgba(0, 255, 102, 0.35);
-  filter: drop-shadow(0 0 2px rgba(0, 255, 102, 0.2));
-}
-
-.feed-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.feed-photo-button {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: zoom-in;
-  display: block;
-}
 
 .live-feed-label {
   margin-top: 10px;
@@ -1234,7 +1228,32 @@ body {
   }
 }
 
+/* Tablet (600px - 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .terminal-feed-col {
+    align-self: center;
+    width: 160px;
+  }
+
+  .live-feed-box {
+    width: 160px;
+    height: 160px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+  }
+}
+
 @media (max-width: 600px) {
+  .nav-contact-icon {
+    display: none;
+  }
+
   .navbar {
     flex-direction: column;
     gap: 10px;
@@ -1247,6 +1266,20 @@ body {
     align-items: flex-start;
   }
   
+  .nav-link {
+    font-size: 13px;
+  }
+
+  .terminal-feed-col {
+    align-self: center;
+    width: 140px;
+  }
+
+  .live-feed-box {
+    width: 140px;
+    height: 140px;
+  }
+
   .term-grid {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1270,7 +1303,7 @@ body {
   }
   
   .project-card {
-    min-height: 160px;
+    min-height: auto;
     padding: 14px;
   }
   
