@@ -254,13 +254,6 @@ body {
   text-shadow: 0 0 4px rgba(0, 255, 102, 0.3);
 }
 
-.nav-contact-icon {
-  cursor: pointer;
-  padding: 0 20px;
-  transform: translateY(3px);
-  color: var(--accent-orange);
-}
-
 /* Workspace Panels */
 .workspace {
   padding: 32px;
@@ -1323,16 +1316,6 @@ body {
 
   .nav-link {
     font-size: 11px;
-  }
-
-  .nav-contact-icon {
-    flex-shrink: 0;
-    padding: 0 4px;
-  }
-
-  .nav-contact-icon svg {
-    width: 18px;
-    height: 18px;
   }
 
   .workspace {

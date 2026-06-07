@@ -1,45 +1,28 @@
-# 📟 Renu Alias - Retro Terminal Portfolio
+# Renu Alias - Retro Terminal Portfolio
 
-A high-fidelity, interactive developer portfolio styled as a retro, hardware-inspired Zsh terminal interface. It features real-time performance indicators, simulated SSH data pipelines, and a command-line interface.
-
-```
-   .-.      renu@alias-server
-  (o o)     ----------------
-  | O |     OS: RustOS x86_64
-   \=/      Kernel: 5.14.0-custom-concurrency
-  /   \     Uptime: 456 days, 2 hours, 12 mins
- //| |\     Shell: zsh 5.8
-// |_| \\   Resolution: 1920x1080 (CRT Mode)
-            Terminal: Terminal-UI Kit v1.0.4
-            CPU: Threadripper 3990X (128) @ 2.9GHz
-            Memory: 48.2GB / 128.0GB
-```
+A high-fidelity, interactive developer portfolio styled as a retro terminal interface. Features a fixed sidebar file explorer, live system diagnostics, simulated git push logs, and a FastAPI backend for dynamic content.
 
 ---
 
-## 🚀 Features
+## Features
 
-- **Interactive Zsh Terminal UI**: A custom-built console mimicking a real Linux terminal with standard command parsing, shell history, autoscroll, and a glowing retro CRT filter.
-- **Custom Terminal Commands**:
-  - `help`: Lists all available commands.
-  - `whoami`: Displays profile bio, stack, and active location.
-  - `projects`: Lists active software engineering works fetched from the backend.
-  - `skills`: Prints the technical skills inventory in a clean `.json` format.
-  - `neofetch`: Renders custom system specs and a minimalist ASCII penguin logo.
-  - `contact`: Redirects focus to the secure SSH transmission portal.
-  - `clear`: Wipes command history.
-- **Live Feed System Diagnostics**: Visual dashboard monitoring real-time performance statistics, connection status indicators, and simulated deployment pipeline git logs.
-- **FastAPI-Backed REST API**: Robust backend managing dynamic portfolio data endpoints and routing client message payloads to local storage.
-- **Secure Handshake Contact Portal**: A retro modal dialogue replicating an SSH terminal connection (`ssh://renu_alias@contact`) to accept, parse, and store client transmissions.
+- **Fixed Sidebar Explorer**: File-tree sidebar navigation with section highlighting, toggle minimize, git push simulation, and a contact icon.
+- **Interactive Terminal (`whoami`)**: Displays a bio card with photo, `whoami` command output, system load bars, and neofetch-style ASCII art.
+- **Live Feed Diagnostics**: Animated performance indicators (RAM, CPU, Uptime, Latency).
+- **Projects Section**: Repository-style cards with tags and external links.
+- **Certifications**: Certifications and achievements displayed in a grid.
+- **Skills JSON Grid**: Tech skills displayed as JSON arrays (languages, frameworks, tools, databases, etc.) with a health-monitor widget.
+- **Contact Modal**: SSH-themed contact form that submits via the API.
+- **Git Push Overlay**: Simulated deployment pipeline log output.
+- **Responsive Layout**: Fixed sidebar on desktop, narrower sidebar on tablets/phones, horizontal-scroll navbar on small screens.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend (User Interface)
 - **Framework**: React 19 (Vite)
-- **Styling**: Modern CSS with HSL variables, glassmorphism overlays, custom keyframe scanline animations, and terminal prompt styling.
-- **Components**: Reusable, monospace developer-focused UI widgets.
+- **Styling**: CSS with HSL variables, monospace retro terminal styling
 
 ### Backend (API Services)
 - **Framework**: FastAPI (Python)
@@ -48,65 +31,66 @@ A high-fidelity, interactive developer portfolio styled as a retro, hardware-ins
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 .
 ├── backend/
-│   ├── .venv/                   # Python virtual environment
 │   ├── main.py                  # FastAPI server entry point
-│   ├── contact_messages.json    # Local database (simulated contact submissions)
+│   ├── contact_messages.json    # Local contact submissions storage
 │   └── requirements.txt         # Backend Python dependencies
 │
 └── frontend/
+    ├── public/
     ├── src/
     │   ├── components/
-    │   │   ├── Terminal.jsx     # Shell interface component & command parser
-    │   │   └── ContactModal.jsx # ssh:// connection message portal modal
-    │   ├── App.jsx              # Application shell & performance HUD layout
-    │   ├── main.jsx             # React entry point
-    │   └── index.css            # Retro neon styling and scanline animation rules
-    ├── index.html               # Main HTML document & metadata definition
-    └── vite.config.js           # Vite development server & reverse proxy config
+    │   │   ├── Terminal.jsx     # whoami card, system load, neofetch
+    │   │   ├── Sidebar.jsx      # Fixed file-tree sidebar
+    │   │   ├── Projects.jsx     # Project repository cards
+    │   │   ├── SkillsHealth.jsx # Skills JSON grid + health monitor
+    │   │   ├── Certifications.jsx
+    │   │   ├── ContactModal.jsx # SSH-themed contact form
+    │   │   ├── GitPushOverlay.jsx # Simulated git push logs
+    │   │   └── SystemLogs.jsx   # Live feed diagnostics
+    │   ├── App.jsx              # Main layout shell
+    │   ├── App.css
+    │   ├── config.js            # API base URL config
+    │   ├── index.css            # All styling
+    │   └── main.jsx             # React entry point
+    ├── .env.example             # VITE_API_URL template
+    ├── index.html
+    └── vite.config.js           # Dev proxy for /api -> localhost:8000
 ```
 
 ---
 
-## 💿 Setup & Execution
+## Setup & Execution
 
 ### 1. Backend Server Setup
-Navigate to the `backend` directory and ensure Python 3.8+ is installed.
 
 ```bash
 cd backend
-# Activate the virtual environment
-# On Windows (PowerShell):
+# Activate virtual environment
+# Windows (PowerShell):
 .\.venv\Scripts\Activate.ps1
-# On Linux/macOS:
+# Linux/macOS:
 source .venv/bin/activate
 
-# Install dependencies
 pip install -r requirements.txt
-
-# Launch FastAPI development server (runs on http://localhost:8000)
 uvicorn main:app --reload --port 8000
 ```
 
 ### 2. Frontend Server Setup
-Navigate to the `frontend` directory, install packages, and boot the Vite development server.
 
 ```bash
 cd frontend
-
-# Install Node modules
 npm install
-
-# Launch Vite server (runs on http://localhost:5173 with proxy configuration)
+cp .env.example .env  # or set VITE_API_URL in Netlify dashboard
 npm run dev
 ```
 
 ### 3. Build for Production
-To build optimize production-ready assets:
+
 ```bash
 cd frontend
 npm run build
@@ -114,17 +98,17 @@ npm run build
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
-- **`GET /api/profile`**: Returns Renu Alias' current developer bio, stack, and status metrics.
-- **`GET /api/projects`**: Fetches details for core open-source projects including GitHub URLs.
-- **`GET /api/skills`**: Retrieves lists of programming languages, tools, frameworks, and databases.
-- **`GET /api/git-push-logs`**: Simulates deployment step output for CI/CD visualization.
-- **`POST /api/contact`**: Receives transmission payload packets and logs them into `contact_messages.json`.
+- **`GET /api/profile`** — Returns developer bio, stack, and status metrics
+- **`GET /api/projects`** — Fetches open-source project details including GitHub URLs
+- **`GET /api/skills`** — Retrieves languages, tools, frameworks, databases
+- **`GET /api/git-push-logs`** — Simulated CI/CD deployment output
+- **`POST /api/contact`** — Receives contact messages and persists to `contact_messages.json`
 
 ---
 
-## 👤 Author
+## Author
 
 **Renu Alias**
 - **Location**: Kochi, Kerala, India
