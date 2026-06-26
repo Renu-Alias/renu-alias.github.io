@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export default function Projects({ projectsData }) {
   // Fallback defaults matching screen.png
@@ -46,7 +46,7 @@ export default function Projects({ projectsData }) {
 
       <div className="projects-grid">
         {projects.map((project, index) => (
-          <div key={index} className="project-card">
+          <div key={index} className="project-card" style={{ transitionDelay: `${index * 0.12}s` }}>
             <div>
               <div className="card-header-row">
                 <span className="project-code">[ {project.id}. {project.code} ]</span>

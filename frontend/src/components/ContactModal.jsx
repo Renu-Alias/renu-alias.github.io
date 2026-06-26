@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import API_BASE_URL from '../config';
 
 const AUTHOR_EMAIL = 'renualiasmeleth@gmail.com';

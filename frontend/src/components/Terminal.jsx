@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import profilePhoto from '../assets/me.jpeg';
 
 const GITHUB_URL = 'https://github.com/Renu-Alias';
 const LINKEDIN_URL = 'https://linkedin.com/in/renu-alias-0022a2329/';
 
-export default function Terminal({ profileData, onNavigate, onContactClick }) {
+export default function Terminal({ profileData, onContactClick }) {
   const [history, setHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
@@ -34,7 +34,7 @@ export default function Terminal({ profileData, onNavigate, onContactClick }) {
       const newHistory = [...history, { type: 'input', text: `➜ ~/portfolio ${cmd}` }];
       const cmdLower = cmd.toLowerCase();
 
-      let reply = '';
+      let reply;
       if (cmdLower === 'help') {
         reply = `Available commands:
   whoami    - Display engineer profile summary
@@ -70,15 +70,15 @@ BIO: AI Automation Engineer and Full-Stack Architect with expertise in designing
     AI-powered code analysis and tutoring platform for beginner programmers.
     Repo: https://github.com/Renu-Alias/CodeSage
     
-01. [SENTINEL] -> Sentinel
+ 01. [SENTINEL] -> Sentinel
     Real-time automated piracy detection system with dual-mode fingerprinting.
     Repo: https://github.com/Renu-Alias/Sentinel
     
-02. [LITECPU16] -> LiteCPU16
+ 02. [LITECPU16] -> LiteCPU16
     A minimal embedded single cycle RISC-V processor.
     Repo: https://github.com/Renu-Alias/LiteCPU16
 
-03. [HMS] -> HMS
+ 03. [HMS] -> HMS
     Hospital management system.
     Repo: https://github.com/Renu-Alias/HMS`;
       } else if (cmdLower === 'skills') {

@@ -1,73 +1,64 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import API_BASE_URL from '../config';
+
+const startSimulation = (setLogs, consoleEndRef, setisDone, logList) => {
+  let index = 0;
+  const interval = setInterval(() => {
+    if (index < logList.length) {
+      setLogs(prev => [...prev, logList[index]]);
+      index++;
+    } else {
+      setisDone(true);
+      clearInterval(interval);
+      setTimeout(() => {
+        if (consoleEndRef.current) {
+          consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, 450); // Speed of logs printing
+};
 
 export default function GitPushOverlay({ isOpen, onClose }) {
   const [logs, setLogs] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isDone, setIsDone] = useState(false);
   const consoleEndRef = useRef(null);
 
-  const rawLogs = [
-    "Initializing deployment pipeline for origin/main...",
-    "[1/4] Resolving workspace lock and packages...",
-    "  -> cargo check --release (success in 1.4s)",
-    "  -> npm run lint --workspace=frontend (success in 0.8s)",
-    "[2/4] Executing test suite...",
-    "  -> Running kernel thread pool tests (12 passed, 0 failed)",
-    "  -> Running atomic pointer safety regression suite (passed)",
-    "[3/4] Compiling assets & minification...",
-    "  -> Building production bundles with vite compiler",
-    "  -> Asset sizes optimized, total footprint: 456KB",
-    "[4/4] Synchronizing artifacts to edge CDN...",
-    "  -> Pushing build: 7f3a1c9",
-    "  -> Invalidating Edge CDN caches...",
-    "DEPLOYMENT COMPLETE: origin/main is now live!",
-    "System performance nominal. Build hash verified: 7f3a1c9."
-  ];
-
   // Load from backend if available, otherwise fallback
   useEffect(() => {
-    if (!isOpen) {
-      setLogs([]);
-      setCurrentIndex(0);
-      setIsDone(false);
-      return;
-    }
+    const rawLogs = [
+      "Initializing deployment pipeline for origin/main...",
+      "[1/4] Resolving workspace lock and packages...",
+      "  -> cargo check --release (success in 1.4s)",
+      "  -> npm run lint --workspace=frontend (success in 0.8s)",
+      "[2/4] Executing test suite...",
+      "  -> Running kernel thread pool tests (12 passed, 0 failed)",
+      "  -> Running atomic pointer safety regression suite (passed)",
+      "[3/4] Compiling assets & minification...",
+      "  -> Building production bundles with vite compiler",
+      "  -> Asset sizes optimized, total footprint: 456KB",
+      "[4/4] Synchronizing artifacts to edge CDN...",
+      "  -> Pushing build: 7f3a1c9",
+      "  -> Invalidating Edge CDN caches...",
+      "DEPLOYMENT COMPLETE: origin/main is now live!",
+      "System performance nominal. Build hash verified: 7f3a1c9."
+    ];
+    if (!isOpen) return;
 
     fetch(`${API_BASE_URL}/api/git-push-logs`)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) {
-          startSimulation(data);
+          startSimulation(setLogs, consoleEndRef, setIsDone, data);
         } else {
-          startSimulation(rawLogs);
+          startSimulation(setLogs, consoleEndRef, setIsDone, rawLogs);
         }
       })
       .catch(() => {
-        startSimulation(rawLogs);
+        startSimulation(setLogs, consoleEndRef, setIsDone, rawLogs);
       });
 
   }, [isOpen]);
-
-  const startSimulation = (logList) => {
-    let index = 0;
-    const interval = setInterval(() => {
-      if (index < logList.length) {
-        setLogs(prev => [...prev, logList[index]]);
-        index++;
-        setCurrentIndex(index);
-      } else {
-        setIsDone(true);
-        clearInterval(interval);
-      }
-    }, 450); // Speed of logs printing
-  };
-
-  useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [logs]);
 
   if (!isOpen) return null;
 

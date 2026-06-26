@@ -1,6 +1,12 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SkillsHealth({ skillsData }) {
+  const sectionRef = useRef(null);
+
   const skills = skillsData || {
     languages: ["Python", "C", "C++", "JavaScript", "Java", "Dart"],
     frameworks: ["Flutter", "Node.js", "Express.js"],
@@ -10,8 +16,33 @@ export default function SkillsHealth({ skillsData }) {
     soft_skills: ["leadership", "collaboration", "adaptability", "problem-solving"]
   };
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.skill-card').forEach((card, i) => {
+        gsap.fromTo(card,
+          { opacity: 0, scaleY: 0.92 },
+          {
+            opacity: 1,
+            scaleY: 1,
+            duration: 0.5,
+            ease: 'expo.out',
+            delay: i * 0.08,
+            transformOrigin: 'top',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="skills" className="skills-section">
+    <section id="skills" className="skills-section" ref={sectionRef}>
       <div className="section-header">
         <span className="section-cmd">cat ./skills.json</span>
       </div>

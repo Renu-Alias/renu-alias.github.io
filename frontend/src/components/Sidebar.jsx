@@ -1,12 +1,46 @@
-import React from 'react';
+import { useRef } from 'react';
+import { gsap } from 'gsap';
 
 export default function Sidebar({ activeSection, onNavigate, onPushClick, onContactClick, isMinimized, onToggleMinimize }) {
+  const pushBtnRef = useRef(null);
+
   const fileItems = [
     { id: 'whoami', name: 'index.js', isDir: false, icon: 'JS' },
     { id: 'projects', name: 'projects.py', isDir: false, icon: 'PY' },
     { id: 'certifications', name: 'certifications.md', isDir: false, icon: 'DOC' },
+    { id: 'achievements', name: 'achievements.md', isDir: false, icon: 'DOC' },
     { id: 'skills', name: 'skills/', isDir: true, icon: 'DIR' },
   ];
+
+  const handleItemClick = (id, el) => {
+    onNavigate(id);
+    if (el) {
+      gsap.fromTo(el,
+        { scaleX: 1 },
+        { scaleX: 1.05, duration: 0.1, yoyo: true, repeat: 1, ease: 'power2.inOut' }
+      );
+    }
+  };
+
+  const handlePushClick = () => {
+    if (!pushBtnRef.current) return;
+    const btn = pushBtnRef.current;
+    const original = btn.textContent;
+    const steps = ['git add .', 'git commit -m "update"', 'git push origin main', '✓ pushed'];
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      if (i < steps.length) {
+        btn.textContent = steps[i];
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          btn.textContent = original;
+        }, 2000);
+      }
+    }, 400);
+    onPushClick();
+  };
 
   return (
     <aside className={`sidebar ${isMinimized ? 'minimized' : ''}`}>
@@ -31,7 +65,7 @@ export default function Sidebar({ activeSection, onNavigate, onPushClick, onCont
               <li
                 key={item.name}
                 className={`tree-item ${isActive ? 'active' : ''}`}
-                onClick={() => onNavigate(item.id)}
+                onClick={(e) => handleItemClick(item.id, e.currentTarget)}
                 title={isMinimized ? item.name : undefined}
                 style={{ justifyContent: isMinimized ? 'center' : 'flex-start', padding: isMinimized ? '12px 0' : '8px 24px' }}
               >
@@ -95,8 +129,9 @@ export default function Sidebar({ activeSection, onNavigate, onPushClick, onCont
 
       <div className="sidebar-footer">
         <button
+          ref={pushBtnRef}
           className="btn-push"
-          onClick={onPushClick}
+          onClick={handlePushClick}
           title="git push"
         >
           {isMinimized ? (
