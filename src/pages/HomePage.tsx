@@ -69,8 +69,8 @@ const HomePage = () => {
 
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(229,9,20,0.12),_transparent_30%),radial-gradient(circle_at_80%_80%,_rgba(255,255,255,0.03),transparent_30%)]" />
 
-      <main className="relative mx-auto min-h-screen max-w-6xl px-6 pt-40 pb-24 text-white">
-        <section id="hero" className="flex min-h-screen snap-start items-center">
+      <main className="relative mx-auto min-h-screen max-w-6xl px-6 pt-24 pb-24 text-white">
+        <section id="hero" className="flex min-h-screen snap-start items-center pt-8">
           <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <ScrollaReveal
               as={motion.div}
