@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
+import NavbarResponsive from '../components/NavbarResponsive';
+import HeroUpdated from '../components/HeroUpdated';
 import MotionTextBlock from '../components/MotionTextBlock';
 import SectionHeading from '../components/SectionHeading';
 import SectionWrapper from '../components/SectionWrapper';
@@ -48,9 +48,9 @@ const skills = [
 const HomePage = () => {
   return (
     <div className="relative min-h-screen overflow-hidden bg-black text-white">
-      <Navbar />
+      <NavbarResponsive />
 
-      <Hero />
+      <HeroUpdated />
 
       <main className="relative mx-auto max-w-6xl px-6 pb-24 text-white">
         <section id="about" className="relative mt-20 snap-start">
