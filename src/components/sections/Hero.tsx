@@ -27,7 +27,7 @@ const Hero = () => (
         <div className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2">
           <motion.h1
             className="font-display font-bold text-stone-300 leading-[0.9] tracking-[-0.04em] text-center whitespace-nowrap"
-            style={{ fontSize: 'clamp(3.125rem, 10.5vw, 10.125rem)' }}
+            style={{ fontSize: 'clamp(4.5rem, 15vw, 13.5rem)' }}
             variants={container}
             initial="hidden"
             animate="show"
@@ -46,12 +46,12 @@ const Hero = () => (
       </div>
     </div>
 
-    {/* Layer 3: Cutout — centered, covers viewport, tightly cropped */}
+    {/* Layer 3: Cutout — bottom-aligned, zoomed out */}
     <img
       src="cutout.png"
       alt=""
-      className="absolute inset-0 z-30 h-full w-full object-cover object-bottom pointer-events-none select-none"
-      style={{ transform: 'scale(0.85)', transformOrigin: 'bottom center' }}
+      className="absolute bottom-0 left-1/2 -translate-x-1/2 z-30 h-auto w-auto pointer-events-none select-none"
+      style={{ maxHeight: '75vh', width: 'auto' }}
       draggable={false}
     />
 
