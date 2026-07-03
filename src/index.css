@@ -20,6 +20,55 @@ body {
   min-height: 100vh;
 }
 
+.scrolla {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity var(--scrolla-duration, 0.8s) ease, transform var(--scrolla-duration, 0.8s) cubic-bezier(0.25, 1, 0.5, 1);
+  transition-delay: var(--scrolla-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.scrolla.is-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.scrolla-left {
+  transform: translate3d(-40px, 0, 0);
+}
+
+.scrolla-left.is-in-view {
+  transform: translate3d(0, 0, 0);
+}
+
+.scrolla-right {
+  transform: translate3d(40px, 0, 0);
+}
+
+.scrolla-right.is-in-view {
+  transform: translate3d(0, 0, 0);
+}
+
+.scrolla-down {
+  transform: translate3d(0, 40px, 0);
+}
+
+.scrolla-down.is-in-view {
+  transform: translate3d(0, 0, 0);
+}
+
+.scrolla-scale {
+  transform: scale(0.95);
+}
+
+.scrolla-scale.is-in-view {
+  transform: scale(1);
+}
+
+.scrolla-fade {
+  transform: none;
+}
+
 .font-display {
   font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
 }

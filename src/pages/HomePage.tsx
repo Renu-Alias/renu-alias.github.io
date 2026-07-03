@@ -11,6 +11,7 @@ import CertificationCard from '../components/CertificationCard';
 import AchievementTimeline from '../components/AchievementTimeline';
 import AIPlayground from '../components/AIPlayground';
 import AnalyticsTicker from '../components/AnalyticsTicker';
+import ScrollaReveal from '../components/ScrollaReveal';
 
 const roles = [
   'Full Stack Developer',
@@ -71,7 +72,8 @@ const HomePage = () => {
       <main className="relative mx-auto min-h-screen max-w-6xl px-6 pt-40 pb-24 text-white">
         <section id="hero" className="flex min-h-screen snap-start items-center">
           <div className="grid w-full gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <motion.div
+            <ScrollaReveal
+              as={motion.div}
               className="space-y-8 max-w-3xl"
               variants={containerVariants}
               initial="hidden"
@@ -115,10 +117,13 @@ const HomePage = () => {
                   Contact
                 </a>
               </motion.div>
-            </motion.div>
+            </ScrollaReveal>
 
-            <motion.div
+            <ScrollaReveal
+              as={motion.div}
               className="relative overflow-hidden"
+              variant="right"
+              delay={120}
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.45, ease: 'easeOut' }}
@@ -137,12 +142,13 @@ const HomePage = () => {
                   }}
                 />
               </div>
-            </motion.div>
+            </ScrollaReveal>
           </div>
         </section>
 
         <section id="about" className="mt-32 snap-start">
-          <SectionWrapper index={0}>
+          <ScrollaReveal>
+            <SectionWrapper index={0}>
             <SectionHeading title="About Me" subtitle="Engineering robust systems and AI architectures with precision, performance, and premium product polish." />
             <div className="space-y-6 max-w-4xl">
               <MotionTextBlock text="I combine full stack development discipline with production-grade system thinking and AI-first innovation. Every product I build is designed for resilience, speed, and intuitive digital narratives." />
@@ -150,10 +156,12 @@ const HomePage = () => {
               <AIPlayground />
             </div>
           </SectionWrapper>
+          </ScrollaReveal>
         </section>
 
         <section id="skills" className="mt-32 snap-start">
-          <SectionWrapper index={1}>
+          <ScrollaReveal variant="scale" delay={80}>
+            <SectionWrapper index={1}>
             <SectionHeading title="Skills" subtitle="A premium suite of languages, frameworks, databases, and infrastructure tools." />
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {skills.map((skill) => (
@@ -161,10 +169,12 @@ const HomePage = () => {
               ))}
             </div>
           </SectionWrapper>
+          </ScrollaReveal>
         </section>
 
         <section id="projects" className="mt-32 snap-start">
-          <SectionWrapper index={2}>
+          <ScrollaReveal variant="left" delay={60}>
+            <SectionWrapper index={2}>
             <SectionHeading title="Projects" subtitle="Engineering stories with clean architecture, strong interfaces, and polished execution." />
             <div className="space-y-6">
               {projects.map((project, index) => (
@@ -172,10 +182,12 @@ const HomePage = () => {
               ))}
             </div>
           </SectionWrapper>
+          </ScrollaReveal>
         </section>
 
         <section id="certifications" className="mt-32 snap-start">
-          <SectionWrapper index={3}>
+          <ScrollaReveal variant="down" delay={90}>
+            <SectionWrapper index={3}>
             <SectionHeading title="Certifications" subtitle="Verified certifications that reinforce my cloud, software, and architecture expertise." />
             <div className="grid gap-4 md:grid-cols-2">
               {certifications.map((cert) => (
@@ -183,65 +195,70 @@ const HomePage = () => {
               ))}
             </div>
           </SectionWrapper>
+          </ScrollaReveal>
         </section>
 
         <section id="achievements" className="mt-32 snap-start">
-          <SectionHeading title="Achievements" subtitle="A technical timeline of hackathons, learnings, and milestone results." />
-          <AchievementTimeline />
+          <ScrollaReveal variant="up" delay={100}>
+            <SectionHeading title="Achievements" subtitle="A technical timeline of hackathons, learnings, and milestone results." />
+            <AchievementTimeline />
+          </ScrollaReveal>
         </section>
 
         <section id="contact" className="mt-32 snap-start pb-32">
-          <SectionWrapper index={4} className="shadow-glow">
-            <div className="mx-auto max-w-4xl text-center">
-              <motion.h3
-                className="font-display text-5xl font-black uppercase tracking-[0.32em] text-white sm:text-6xl"
-                initial={{ opacity: 0, y: 24, letterSpacing: '0.5em' }}
-                whileInView={{ opacity: 1, y: 0, letterSpacing: '0.22em' }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.9 }}
-              >
-                LET&apos;S ARCHITECT THE FUTURE.
-              </motion.h3>
-              <p className="mt-6 text-lg text-white/70">
-                Based in Kochi, India{' '}
-                <span className="inline-flex items-center gap-2 text-crimson">
-                  <span className="relative flex h-3 w-3">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-crimson opacity-75" />
-                    <span className="relative inline-flex h-3 w-3 rounded-full bg-crimson" />
+          <ScrollaReveal variant="up" delay={120}>
+            <SectionWrapper index={4} className="shadow-glow">
+              <div className="mx-auto max-w-4xl text-center">
+                <motion.h3
+                  className="font-display text-5xl font-black uppercase tracking-[0.32em] text-white sm:text-6xl"
+                  initial={{ opacity: 0, y: 24, letterSpacing: '0.5em' }}
+                  whileInView={{ opacity: 1, y: 0, letterSpacing: '0.22em' }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.9 }}
+                >
+                  LET&apos;S ARCHITECT THE FUTURE.
+                </motion.h3>
+                <p className="mt-6 text-lg text-white/70">
+                  Based in Kochi, India{' '}
+                  <span className="inline-flex items-center gap-2 text-crimson">
+                    <span className="relative flex h-3 w-3">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-crimson opacity-75" />
+                      <span className="relative inline-flex h-3 w-3 rounded-full bg-crimson" />
+                    </span>
                   </span>
-                </span>
-              </p>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                <motion.div
-                  className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
-                  whileHover={{ y: -4 }}
-                >
-                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">Email</p>
-                  <a href="mailto:renu.alias@example.com" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
-                    renu.alias@example.com
-                  </a>
-                </motion.div>
-                <motion.div
-                  className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
-                  whileHover={{ y: -4 }}
-                >
-                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">GitHub</p>
-                  <a href="https://github.com/renualias" target="_blank" rel="noreferrer" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
-                    /renualias
-                  </a>
-                </motion.div>
-                <motion.div
-                  className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
-                  whileHover={{ y: -4 }}
-                >
-                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">LinkedIn</p>
-                  <a href="https://linkedin.com/in/renualias" target="_blank" rel="noreferrer" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
-                    /in/renualias
-                  </a>
-                </motion.div>
+                </p>
+                <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                  <motion.div
+                    className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
+                    whileHover={{ y: -4 }}
+                  >
+                    <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">Email</p>
+                    <a href="mailto:renu.alias@example.com" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
+                      renu.alias@example.com
+                    </a>
+                  </motion.div>
+                  <motion.div
+                    className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
+                    whileHover={{ y: -4 }}
+                  >
+                    <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">GitHub</p>
+                    <a href="https://github.com/renualias" target="_blank" rel="noreferrer" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
+                      /renualias
+                    </a>
+                  </motion.div>
+                  <motion.div
+                    className="group rounded-3xl border border-white/10 bg-[#0B0B0C] p-6 text-left transition duration-300 hover:border-crimson hover:shadow-[0_0_40px_rgba(229,9,20,0.35)]"
+                    whileHover={{ y: -4 }}
+                  >
+                    <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/40">LinkedIn</p>
+                    <a href="https://linkedin.com/in/renualias" target="_blank" rel="noreferrer" className="mt-3 block text-lg font-semibold text-white transition group-hover:text-crimson">
+                      /in/renualias
+                    </a>
+                  </motion.div>
+                </div>
               </div>
-            </div>
-          </SectionWrapper>
+            </SectionWrapper>
+          </ScrollaReveal>
         </section>
       </main>
     </div>
