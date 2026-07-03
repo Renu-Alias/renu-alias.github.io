@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000000;
+}
+
+body {
+  @apply bg-pitch text-white overflow-x-hidden font-body;
+  cursor: none;
+  background: #000000;
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'SFMono-Regular', monospace;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+main {
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(229, 9, 20, 0.7);
+  color: #ffffff;
+}
+
+button,
+a {
+  cursor: none;
+}
