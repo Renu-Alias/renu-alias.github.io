@@ -18,6 +18,27 @@ const projectData = [
       'Designed a React-driven enterprise automation dashboard with microservices-ready backend integration and adaptive UX flows.',
     link: 'https://github.com/renualias/synapse-automation',
     tags: ['React', 'Node.js', 'Microservices', 'Tailwind']
+  },
+  {
+    name: 'Pulse Analytics Dashboard',
+    description:
+      'Built a real-time analytics dashboard with streaming data pipelines, interactive charts, and role-based access control for product teams.',
+    link: 'https://github.com/renualias/pulse-analytics',
+    tags: ['React', 'WebSockets', 'D3.js', 'RBAC']
+  },
+  {
+    name: 'Echo RAG Pipeline',
+    description:
+      'Developed a retrieval-augmented generation pipeline for enterprise document search, combining vector embeddings with re-ranking for high-precision answers.',
+    link: 'https://github.com/renualias/echo-rag',
+    tags: ['Python', 'LangChain', 'Pinecone', 'FastAPI']
+  },
+  {
+    name: 'ZeroDeploy CLI',
+    description:
+      'Created a serverless deployment CLI with multi-cloud support, infrastructure-as-code generation, and one-command rollback for rapid prototyping.',
+    link: 'https://github.com/renualias/zerodeploy-cli',
+    tags: ['TypeScript', 'AWS CDK', 'Docker', 'CLI']
   }
 ];
 

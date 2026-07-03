@@ -6,8 +6,8 @@ const interactiveSelectors = ['a', 'button', 'input', 'textarea', 'select', '[ro
 const Cursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  const springX = useSpring(cursorX, { stiffness: 180, damping: 24, mass: 0.3 });
-  const springY = useSpring(cursorY, { stiffness: 180, damping: 24, mass: 0.3 });
+  const springX = useSpring(cursorX, { stiffness: 400, damping: 18, mass: 0.1 });
+  const springY = useSpring(cursorY, { stiffness: 400, damping: 18, mass: 0.1 });
 
   useEffect(() => {
     const move = (e: MouseEvent) => {

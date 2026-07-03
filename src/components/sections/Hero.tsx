@@ -31,49 +31,55 @@ const Hero = () => (
       <div className="absolute inset-0 bg-gradient-to-r from-pitch/40 to-transparent" />
     </div>
 
-    {/* Content */}
-    <div className="relative z-20 mx-auto w-full max-w-container px-6">
-      <div className="flex min-h-screen flex-col items-center justify-center">
-        <motion.h1
-          className="font-display font-bold text-primary leading-[0.9] tracking-[-0.04em] text-center"
-          style={{ fontSize: 'clamp(4rem, 14vw, 13.75rem)' }}
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          {nameLetters.map((letter, i) =>
-            letter === ' ' ? (
-              <span key={i} className="inline-block w-[0.25em]" />
-            ) : (
-              <motion.span key={i} className="inline-block" variants={letterItem}>
-                {letter}
-              </motion.span>
-            )
-          )}
-        </motion.h1>
-
-        <motion.p
-          className="mt-6 font-mono text-sm uppercase tracking-[0.3em] text-muted"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2, ease: 'easeOut' }}
-        >
-          Full-Stack Developer — System Design — AI
-        </motion.p>
-
-        <motion.div
-          className="mt-10"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.5, ease: 'easeOut' }}
-        >
-          <a
-            href="#about"
-            className="inline-block rounded-full border border-accent px-8 py-3 font-mono text-xs uppercase tracking-[0.25em] text-accent transition-all duration-400 hover:bg-accent hover:text-white hover:scale-105 active:scale-95"
+    {/* Content — name absolutely centered, tagline + CTA independently positioned below */}
+    <div className="absolute inset-0 z-20">
+      <div className="relative h-full mx-auto w-full max-w-container px-6">
+        {/* Name — fixed at viewport center */}
+        <div className="absolute left-1/2 top-[38%] -translate-x-1/2 -translate-y-1/2">
+          <motion.h1
+            className="font-display font-bold text-stone-300 leading-[0.9] tracking-[-0.04em] text-center whitespace-nowrap"
+            style={{ fontSize: 'clamp(4rem, 14vw, 13.75rem)' }}
+            variants={container}
+            initial="hidden"
+            animate="show"
           >
-            Explore Work
-          </a>
-        </motion.div>
+            {nameLetters.map((letter, i) =>
+              letter === ' ' ? (
+                <span key={i} className="inline-block w-[0.25em]" />
+              ) : (
+                <motion.span key={i} className="inline-block" variants={letterItem}>
+                  {letter}
+                </motion.span>
+              )
+            )}
+          </motion.h1>
+        </div>
+
+        {/* Tagline + CTA — positioned below name */}
+        <div className="absolute left-1/2 -translate-x-1/2 text-center" style={{ top: 'calc(50% + 14rem)' }}>
+          <motion.p
+            className="font-mono text-sm uppercase tracking-[0.3em] text-muted"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.2, ease: 'easeOut' }}
+          >
+            Full-Stack Developer — System Design — AI
+          </motion.p>
+
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.5, ease: 'easeOut' }}
+          >
+            <a
+              href="#about"
+              className="inline-block rounded-full border border-accent px-8 py-3 font-mono text-xs uppercase tracking-[0.25em] text-accent transition-all duration-400 hover:bg-accent hover:text-white hover:scale-105 active:scale-95"
+            >
+              Explore Work
+            </a>
+          </motion.div>
+        </div>
       </div>
     </div>
 
