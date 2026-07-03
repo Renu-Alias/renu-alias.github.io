@@ -20,7 +20,7 @@ const letterItem = {
 const Hero = () => (
   <section
     id="hero"
-    className="relative flex min-h-screen items-center justify-center overflow-hidden"
+    className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden"
     style={{ backgroundColor: '#050505' }}
   >
     {/* Background atmosphere — CSS gradients + grid */}
@@ -73,7 +73,7 @@ const Hero = () => (
     {/* Layer 4: Tagline + CTA — above cutout */}
     <div className="absolute inset-0 z-[35]">
       <div className="relative h-full mx-auto w-full max-w-container px-6">
-        <div className="absolute left-1/2 -translate-x-1/2 text-center" style={{ top: 'calc(50% + 14rem)' }}>
+          <div className="absolute left-1/2 -translate-x-1/2 text-center" style={{ top: 'calc(50% + 15.5rem)' }}>
           <motion.p
             className="font-mono text-sm uppercase tracking-[0.3em] text-muted"
             initial={{ opacity: 0, y: 16 }}
