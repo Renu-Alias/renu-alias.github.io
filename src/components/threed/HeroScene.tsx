@@ -1,161 +1,219 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef, useMemo } from 'react';
-import type { Mesh, Group } from 'three';
+import type { Points, LineSegments } from 'three';
 import * as THREE from 'three';
 
-function WireframeRing({ color = '#E63946', ...props }: { color?: string; position?: [number, number, number]; scale?: number; rotSpeed?: number }) {
-  const ref = useRef<Mesh>(null);
-  const speed = useMemo(() => props.rotSpeed ?? (0.08 + Math.random() * 0.06), []);
-
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const t = clock.getElapsedTime();
-    ref.current.rotation.x = t * speed * 0.5;
-    ref.current.rotation.y = t * speed;
-    ref.current.rotation.z = Math.sin(t * 0.2) * 0.1;
-  });
-
-  return (
-    <mesh ref={ref} position={props.position} scale={props.scale ?? 1}>
-      <torusGeometry args={[0.8, 0.15, 24, 48]} />
-      <meshBasicMaterial color={color} wireframe transparent opacity={0.08} />
-    </mesh>
-  );
-}
-
-function ParticleField({ count = 2000 }) {
-  const ref = useRef<Group>(null);
-  const [positions, speeds, offsets, origPos] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const spd = new Float32Array(count);
-    const off = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 5 + Math.random() * 15;
-      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta) - 5;
-      spd[i] = 0.1 + Math.random() * 0.2;
-      off[i] = Math.random() * Math.PI * 2;
-    }
-    return [pos, spd, off, pos.slice()];
-  }, [count]);
-
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const t = clock.getElapsedTime();
-    const geo = (ref.current.children[0] as THREE.Points).geometry;
-    const pos = geo.attributes.position.array as Float32Array;
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      const wave = Math.sin(t * speeds[i] + offsets[i]) * 0.8;
-      pos[i3 + 1] = origPos[i3 + 1] + wave;
-      pos[i3] = origPos[i3] + Math.sin(t * speeds[i] * 0.5 + offsets[i]) * 0.4;
-      pos[i3 + 2] = origPos[i3 + 2] + Math.cos(t * speeds[i] * 0.4 + offsets[i]) * 0.4;
-    }
-    geo.attributes.position.needsUpdate = true;
-    ref.current.rotation.y = t * 0.008;
-  });
-
-  return (
-    <group ref={ref}>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-        </bufferGeometry>
-        <pointsMaterial size={0.04} color="#F5F5F5" transparent opacity={0.25} sizeAttenuation />
-      </points>
-    </group>
-  );
-}
-
-function RedParticles({ count = 300 }) {
-  const ref = useRef<Group>(null);
+/* ------------------------------------------------------------------ */
+/*  Ambient background stars (faint white specks)                      */
+/* ------------------------------------------------------------------ */
+function BackgroundStars({ count = 1000 }) {
+  const ref = useRef<Points>(null);
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const theta = Math.random() * Math.PI * 2;
-      const r = 3 + Math.random() * 8;
-      pos[i * 3] = r * Math.cos(theta);
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 6 - 1;
-      pos[i * 3 + 2] = r * Math.sin(theta) - 3;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 8 + Math.random() * 18;
+      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+      pos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta) - 6;
     }
     return pos;
   }, [count]);
 
   useFrame(({ clock }) => {
     if (!ref.current) return;
-    ref.current.rotation.y = clock.getElapsedTime() * 0.01;
+    ref.current.rotation.y = clock.getElapsedTime() * 0.004;
   });
 
   return (
-    <group ref={ref}>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-        </bufferGeometry>
-        <pointsMaterial size={0.06} color="#E63946" transparent opacity={0.2} sizeAttenuation />
-      </points>
-    </group>
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
+      </bufferGeometry>
+      <pointsMaterial size={0.03} color="#F5F5F5" transparent opacity={0.15} sizeAttenuation />
+    </points>
   );
 }
 
-function AtmosphereGlow() {
-  const ref = useRef<Mesh>(null);
-  useFrame(({ clock }) => {
-    if (!ref.current) return;
-    const mat = ref.current.material as THREE.MeshBasicMaterial;
-    mat.opacity = 0.04 + Math.sin(clock.getElapsedTime() * 0.3) * 0.015;
-  });
+/* ------------------------------------------------------------------ */
+/*  Neural network — drifting glow nodes + dynamic connection lines    */
+/* ------------------------------------------------------------------ */
+const NN_NODES = 70;
+const MAX_EDGES = 240;
+const BOUNDARY = 7.5;
+/** Squared distance threshold for a connection to appear */
+const CONNECT_DIST2 = 14;
 
-  return (
-    <mesh ref={ref} position={[0, -3, -4]} scale={[8, 3, 1]}>
-      <planeGeometry />
-      <meshBasicMaterial color="#E63946" transparent opacity={0.04} />
-    </mesh>
-  );
-}
+function NeuralNetwork() {
+  const dotRef = useRef<Points>(null);
+  const lineRef = useRef<LineSegments>(null);
 
-function FloatingDots() {
-  const count = 60;
-  const ref = useRef<Group>(null);
-  const data = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const spd = new Float32Array(count);
-    const off = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 18;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 6 - 2;
-      spd[i] = 0.2 + Math.random() * 0.3;
-      off[i] = Math.random() * Math.PI * 2;
+  /* ---- per-node data: px,py,pz, vx,vy,vz, phase ---- */
+  const nodeData = useMemo(() => {
+    const data = new Float32Array(NN_NODES * 7);
+    for (let i = 0; i < NN_NODES; i++) {
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+      const r = 1 + Math.random() * (BOUNDARY - 1);
+      const i7 = i * 7;
+      data[i7] = r * Math.sin(phi) * Math.cos(theta);
+      data[i7 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      data[i7 + 2] = r * Math.cos(phi);
+      data[i7 + 3] = (Math.random() - 0.5) * 0.004;
+      data[i7 + 4] = (Math.random() - 0.5) * 0.004;
+      data[i7 + 5] = (Math.random() - 0.5) * 0.004;
+      data[i7 + 6] = Math.random() * Math.PI * 2;
     }
-    return { pos, spd, off };
+    return data;
   }, []);
 
+  /* ---- shared geometry buffers ---- */
+  const dotPositions = useMemo(() => {
+    const arr = new Float32Array(NN_NODES * 3);
+    for (let i = 0; i < NN_NODES; i++) {
+      arr[i * 3] = nodeData[i * 7];
+      arr[i * 3 + 1] = nodeData[i * 7 + 1];
+      arr[i * 3 + 2] = nodeData[i * 7 + 2];
+    }
+    return arr;
+  }, []);
+
+  const linePositions = useMemo(() => new Float32Array(MAX_EDGES * 6), []);
+
   useFrame(({ clock }) => {
-    if (!ref.current) return;
     const t = clock.getElapsedTime();
-    for (let i = 0; i < count; i++) {
-      const i3 = i * 3;
-      const mesh = ref.current.children[i] as THREE.Mesh;
-      mesh.position.y = data.pos[i3 + 1] + Math.sin(t * data.spd[i] + data.off[i]) * 0.5;
+
+    /* ---- update node positions (bounded brownian drift) ---- */
+    for (let i = 0; i < NN_NODES; i++) {
+      const i7 = i * 7;
+      const phase = nodeData[i7 + 6];
+
+      /* Add gentle oscillating force for organic motion */
+      nodeData[i7 + 3] += Math.sin(t * 0.15 + phase) * 0.0003;
+      nodeData[i7 + 4] += Math.cos(t * 0.12 + phase * 1.3) * 0.0003;
+      nodeData[i7 + 5] += Math.sin(t * 0.18 + phase * 0.7) * 0.0003;
+
+      /* Damping */
+      nodeData[i7 + 3] *= 0.992;
+      nodeData[i7 + 4] *= 0.992;
+      nodeData[i7 + 5] *= 0.992;
+
+      /* Apply velocity */
+      nodeData[i7] += nodeData[i7 + 3];
+      nodeData[i7 + 1] += nodeData[i7 + 4];
+      nodeData[i7 + 2] += nodeData[i7 + 5];
+
+      /* Spherical boundary */
+      const dx = nodeData[i7], dy = nodeData[i7 + 1], dz = nodeData[i7 + 2];
+      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+      if (dist > BOUNDARY) {
+        const ratio = BOUNDARY / dist;
+        nodeData[i7] *= ratio;
+        nodeData[i7 + 1] *= ratio;
+        nodeData[i7 + 2] *= ratio;
+        nodeData[i7 + 3] *= -0.4;
+        nodeData[i7 + 4] *= -0.4;
+        nodeData[i7 + 5] *= -0.4;
+      }
+    }
+
+    /* ---- update glow dot positions ---- */
+    if (dotRef.current) {
+      const attr = dotRef.current.geometry.attributes.position;
+      const arr = attr.array as Float32Array;
+      for (let i = 0; i < NN_NODES; i++) {
+        arr[i * 3] = nodeData[i * 7];
+        arr[i * 3 + 1] = nodeData[i * 7 + 1];
+        arr[i * 3 + 2] = nodeData[i * 7 + 2];
+      }
+      attr.needsUpdate = true;
+    }
+
+    /* ---- rebuild connections between nearby nodes ---- */
+    if (lineRef.current) {
+      const attr = lineRef.current.geometry.attributes.position;
+      const arr = attr.array as Float32Array;
+      let edgeCount = 0;
+
+      for (let i = 0; i < NN_NODES && edgeCount < MAX_EDGES; i++) {
+        const i7 = i * 7;
+        const xi = nodeData[i7], yi = nodeData[i7 + 1], zi = nodeData[i7 + 2];
+
+        for (let j = i + 1; j < NN_NODES && edgeCount < MAX_EDGES; j++) {
+          const j7 = j * 7;
+          const dx = xi - nodeData[j7];
+          const dy = yi - nodeData[j7 + 1];
+          const dz = zi - nodeData[j7 + 2];
+          const d2 = dx * dx + dy * dy + dz * dz;
+
+          if (d2 < CONNECT_DIST2 && d2 > 0.3) {
+            const idx = edgeCount * 6;
+            arr[idx] = xi;
+            arr[idx + 1] = yi;
+            arr[idx + 2] = zi;
+            arr[idx + 3] = nodeData[j7];
+            arr[idx + 4] = nodeData[j7 + 1];
+            arr[idx + 5] = nodeData[j7 + 2];
+            edgeCount++;
+          }
+        }
+      }
+
+      /* Collapse unused slots to keep geometry size stable */
+      for (let i = edgeCount; i < MAX_EDGES; i++) {
+        const idx = i * 6;
+        arr[idx] = arr[idx + 3] = 0;
+        arr[idx + 1] = arr[idx + 4] = 0;
+        arr[idx + 2] = arr[idx + 5] = 0;
+      }
+
+      attr.needsUpdate = true;
+      lineRef.current.geometry.setDrawRange(0, edgeCount * 2);
     }
   });
 
   return (
-    <group ref={ref}>
-      {Array.from({ length: count }).map((_, i) => (
-        <mesh key={i} position={[data.pos[i * 3], data.pos[i * 3 + 1], data.pos[i * 3 + 2]]}>
-          <sphereGeometry args={[0.04, 6, 6]} />
-          <meshBasicMaterial color={i % 5 === 0 ? '#E63946' : '#F5F5F5'} transparent opacity={0.15} />
-        </mesh>
-      ))}
+    <group>
+      {/* Glowing nodes */}
+      <points ref={dotRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={NN_NODES}
+            array={dotPositions}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.1}
+          color="#E63946"
+          transparent
+          opacity={0.35}
+          sizeAttenuation
+          depthWrite={false}
+        />
+      </points>
+
+      {/* Connection lines */}
+      <lineSegments ref={lineRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={MAX_EDGES * 2}
+            array={linePositions}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <lineBasicMaterial color="#E63946" transparent opacity={0.07} />
+      </lineSegments>
     </group>
   );
 }
 
+/* ------------------------------------------------------------------ */
+/*  Scene assembly                                                     */
+/* ------------------------------------------------------------------ */
 const HeroScene = () => (
   <Canvas
     camera={{ position: [0, 0.5, 9], fov: 55 }}
@@ -163,15 +221,8 @@ const HeroScene = () => (
     gl={{ antialias: true, alpha: true }}
     style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
   >
-    <ParticleField count={2000} />
-    <RedParticles count={400} />
-    <FloatingDots />
-    <WireframeRing position={[-4, 1.5, -2]} scale={1.2} />
-    <WireframeRing position={[4, -1, -2.5]} scale={1} />
-    <WireframeRing position={[0, 3, -4]} scale={1.5} rotSpeed={0.05} />
-    <WireframeRing position={[-3, -2.5, -3.5]} scale={0.8} color="#F5F5F5" />
-    <WireframeRing position={[3.5, 2, -4]} scale={1.1} />
-    <AtmosphereGlow />
+    <BackgroundStars count={1000} />
+    <NeuralNetwork />
   </Canvas>
 );
 

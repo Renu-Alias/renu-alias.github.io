@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Suspense, lazy } from 'react';
+import EngineeringBg from '../EngineeringBg';
 
 const HeroScene = lazy(() => import('../threed/HeroScene'));
 
@@ -23,6 +24,9 @@ const Hero = () => (
     className="relative flex h-[100dvh] flex-col overflow-hidden"
     style={{ backgroundColor: '#050505' }}
   >
+    {/* Engineering blueprint background */}
+    <EngineeringBg />
+
     {/* Background atmosphere */}
     <motion.div
       className="absolute inset-0 z-0 overflow-hidden"
@@ -65,18 +69,18 @@ const Hero = () => (
       </div>
 
       {/* Tagline + CTA — above cutout */}
-      <div className="flex flex-col items-center pb-4 pt-[calc(2rem+4cm)]" style={{ zIndex: 35 }}>
+      <div className="flex flex-col items-center pb-4 pt-[calc(4rem+4cm)]" style={{ zIndex: 35 }}>
         <motion.p
           className="font-mono text-sm uppercase tracking-[0.3em] text-muted"
           initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: '1rem' }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.6, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          Full-Stack Developer — System Design — AI
+          Full-Stack Developer — System Design — AI/ML
         </motion.p>
 
         <motion.div
-          className="mt-10 ml-[-1rem]"
+          className="mt-6"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
@@ -91,7 +95,7 @@ const Hero = () => (
       </div>
 
       {/* Metadata — at bottom */}
-      <div className="flex items-end justify-between pb-8" style={{ zIndex: 40 }}>
+      <div className="flex items-center justify-between pb-6 pt-4" style={{ zIndex: 40 }}>
         <motion.div
           className="space-y-1"
           initial={{ opacity: 0 }}
