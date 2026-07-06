@@ -33,12 +33,12 @@ const Hero = () => (
       </Suspense>
     </div>
 
-    {/* Content wrapper — above cutout */}
-    <div className="relative z-50 mx-auto flex w-full max-w-container flex-1 flex-col px-6">
+    {/* Flex content: name + bottom row — no tagline here */}
+    <div className="mx-auto flex w-full max-w-container flex-1 flex-col px-6">
       {/* Name */}
-      <div className="flex flex-1 items-center justify-center">
+      <div className="relative z-20 flex flex-1 items-center justify-center">
         <motion.h1
-          className="font-display font-bold text-stone-300 leading-[0.9] tracking-[-0.04em] text-center whitespace-nowrap -mt-[1cm]"
+          className="font-display font-bold text-stone-300 leading-[0.9] tracking-[-0.04em] text-center whitespace-nowrap -mt-[2cm]"
           style={{ fontSize: 'clamp(3.7rem, 14.8vw, 14.4rem)' }}
           variants={container}
           initial="hidden"
@@ -56,20 +56,22 @@ const Hero = () => (
         </motion.h1>
       </div>
 
-      {/* Tagline */}
-      <div className="flex flex-shrink-0 flex-col items-center pb-4 pt-[2cm]">
-        <motion.p
-          className="font-mono text-sm uppercase tracking-[0.3em] text-muted"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Full-Stack Developer — System Design — AI/ML
-        </motion.p>
-      </div>
+      {/* Bottom wrapper — sits at bottom, tagline 4px above */}
+      <div className="relative mt-auto flex-shrink-0">
+        {/* Tagline — exactly 4px above the bottom row */}
+        <div className="absolute left-1/2 z-[70] -translate-x-1/2" style={{ bottom: 'calc(100% - 14px)' }}>
+          <motion.p
+            className="font-mono text-sm uppercase tracking-[0.3em] text-muted whitespace-nowrap"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2, delay: 2.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            Full-Stack Developer — System Design — AI/ML
+          </motion.p>
+        </div>
 
-      {/* Bottom row: Location | CTA | Discipline */}
-      <div className="flex flex-shrink-0 mt-auto items-center justify-between pb-10 pt-6">
+        {/* Bottom row: Location | CTA | Discipline */}
+        <div className="relative z-[70] flex items-center justify-between pb-10 pt-6">
         <motion.div
           className="space-y-1"
           initial={{ opacity: 0 }}
@@ -83,6 +85,7 @@ const Hero = () => (
         </motion.div>
 
         <motion.div
+          className="mt-2"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.8, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
@@ -107,6 +110,7 @@ const Hero = () => (
           </p>
         </motion.div>
       </div>
+      </div>
     </div>
 
     {/* Cutout — in front of name, bottom-aligned */}
@@ -118,7 +122,7 @@ const Hero = () => (
       draggable={false}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 2.4, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.2, delay: 0, ease: [0.16, 1, 0.3, 1] }}
     />
   </section>
 );
