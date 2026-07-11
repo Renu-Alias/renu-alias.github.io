@@ -17,6 +17,9 @@ function App() {
   const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
+    /* Preload Three.js vendor chunk immediately (don't wait for RAF) */
+    import('./components/threed/PersistentScene');
+
     /* Defer 3D mount until after first paint */
     const id = requestAnimationFrame(() => setShow3d(true));
 

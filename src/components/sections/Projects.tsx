@@ -78,7 +78,7 @@ const Projects = () => {
             <Card>
               <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-5">
                 <div className="relative h-32 sm:h-40 overflow-hidden rounded-xl border border-white/10 bg-pitch lg:col-span-2 lg:h-auto">
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<div className="absolute inset-0 bg-white/[0.02] animate-pulse" />}>
                     <ProjectScene index={shapeForIndex[i]} />
                   </Suspense>
                 </div>

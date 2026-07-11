@@ -181,6 +181,9 @@ const CyberBg = () => {
       vignette.addColorStop(0, 'rgba(0,0,0,0)');
       vignette.addColorStop(0.5, 'rgba(0,0,0,0)');
       vignette.addColorStop(1, 'rgba(0,0,0,0.3)');
+
+      c.fillStyle = BG;
+      c.fillRect(0, 0, w, h);
     }
 
     init();
