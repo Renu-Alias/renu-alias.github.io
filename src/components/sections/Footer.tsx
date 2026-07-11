@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 const contacts = [
   {
@@ -20,7 +20,7 @@ const contacts = [
     href: 'https://github.com/Renu-Alias',
     action: 'link' as const,
     icon: (
-      <svg viewBox="1.5 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="3.9 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
       </svg>
     )
@@ -31,8 +31,12 @@ const contacts = [
     href: 'https://www.linkedin.com/in/renu-alias-0022a2329/',
     action: 'link' as const,
     icon: (
-      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="3" />
+        <path d="M8 11v5" />
+        <path d="M8 8h.01" />
+        <path d="M12 16v-5" />
+        <path d="M16 16v-3a2 2 0 0 0-4 0" />
       </svg>
     )
   }
@@ -47,7 +51,6 @@ const Footer = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [focused, setFocused] = useState<string | null>(null);
-  const dotRef = useRef<SVGCircleElement>(null);
 
   const active = hovered || focused;
 
@@ -75,30 +78,6 @@ const Footer = () => {
       handleClick(item);
     }
   }, [handleClick]);
-
-  /* Traveling dot animation via rAF */
-  useEffect(() => {
-    let start: number | null = null;
-    const duration = 6000;
-    let raf: number;
-
-    const tick = (ts: number) => {
-      if (!start) start = ts;
-      const elapsed = (ts - start) % duration;
-      const p = elapsed / duration;
-      /* traverse: 0→1 across segments, then reverse 1→0 */
-      const phase = p < 0.5 ? p * 2 : 2 - p * 2;
-      if (dotRef.current) {
-        const cx = 6 + phase * 88;
-        dotRef.current.setAttribute('cx', `${cx}`);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
   const isActive = (label: string) => active === label;
   const isSeg0Active = isActive('EMAIL') || isActive('GITHUB');
   const isSeg1Active = isActive('GITHUB') || isActive('LINKEDIN');
@@ -140,30 +119,16 @@ const Footer = () => {
                 className="absolute inset-0 w-full h-full pointer-events-none"
                 viewBox="0 0 100 14"
                 preserveAspectRatio="none"
-                style={{ opacity: 0.25 }}
               >
-                <line x1="6" y1="7" x2="47" y2="7" stroke="#E63946" strokeWidth="1" strokeDasharray="3 4" />
-                <line x1="53" y1="7" x2="94" y2="7" stroke="#E63946" strokeWidth="1" strokeDasharray="3 4" />
-                <line
-                  x1="6" y1="7" x2="47" y2="7"
-                  stroke="#E63946" strokeWidth="1.5" strokeDasharray="3 4"
-                  className="transition-opacity duration-300"
-                  style={{ opacity: isSeg0Active ? 0.7 : 0 }}
-                />
-                <line
-                  x1="53" y1="7" x2="94" y2="7"
-                  stroke="#E63946" strokeWidth="1.5" strokeDasharray="3 4"
-                  className="transition-opacity duration-300"
-                  style={{ opacity: isSeg1Active ? 0.7 : 0 }}
-                />
-                <circle ref={dotRef} r="1.5" fill="#E63946" opacity="0.5" />
+                <line x1="6" y1="7" x2="47" y2="7" stroke="#E63946" strokeWidth="1" strokeDasharray="3 4" className="transition-opacity duration-300" style={{ opacity: isSeg0Active ? 0.5 : 0.25 }} />
+                <line x1="53" y1="7" x2="94" y2="7" stroke="#E63946" strokeWidth="1" strokeDasharray="3 4" className="transition-opacity duration-300" style={{ opacity: isSeg1Active ? 0.5 : 0.25 }} />
               </svg>
 
               <div className="flex flex-row justify-between items-center h-full">
                 {contacts.map((item) => (
                   <div
                     key={item.label}
-                    className="relative"
+                    className={`relative w-14${item.label !== 'LINKEDIN' ? ' -ml-0.5' : ''}`}
                     onMouseEnter={() => setHovered(item.label)}
                     onMouseLeave={() => setHovered(null)}
                     onFocus={() => setFocused(item.label)}
@@ -198,15 +163,15 @@ const Footer = () => {
                         {item.icon}
                       </span>
                     </button>
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence>
                       {(isActive(item.label) || (item.action === 'copy' && copied)) && (
                         <motion.span
                           key={copied && item.action === 'copy' ? 'copied' : item.value}
-                          initial={{ opacity: 0, y: -4 }}
+                          initial={{ opacity: 0, y: 6 }}
                           animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -4 }}
-                          transition={{ duration: 0.2 }}
-                          className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-accent/80 absolute top-full mt-1 whitespace-nowrap left-1/2 -translate-x-1/2"
+                          exit={{ opacity: 0, y: 6 }}
+                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                          className={`font-mono text-[0.6rem] tracking-[0.2em] text-accent/80 absolute bottom-full mb-3 whitespace-nowrap left-1/2 -translate-x-1/2 pointer-events-none${item.value.includes('@') ? '' : ' uppercase'}`}
                         >
                           {item.action === 'copy' && copied ? 'Copied!' : item.value}
                         </motion.span>
@@ -220,9 +185,11 @@ const Footer = () => {
             {/* Labels row */}
             <div className="flex flex-row justify-between mt-4">
               {contacts.map((item) => (
-                <span key={item.label} className="font-mono text-label text-muted tracking-wider">
-                  {item.label}
-                </span>
+                <div key={item.label} className={item.label !== 'LINKEDIN' ? '-ml-0.5' : ''}>
+                  <span className="font-mono text-label text-muted tracking-wider">
+                    {item.label}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
@@ -281,15 +248,15 @@ const Footer = () => {
                   <span className="font-mono text-label text-muted tracking-wider">
                     {item.label}
                   </span>
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     {(isActive(item.label) || (item.action === 'copy' && copied)) && (
                       <motion.span
                         key={copied && item.action === 'copy' ? 'copied' : item.value}
-                        initial={{ opacity: 0, y: -4 }}
+                        initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -4 }}
-                        transition={{ duration: 0.2 }}
-                        className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-accent/80 absolute top-full mt-1 whitespace-nowrap"
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                        className={`font-mono text-[0.6rem] tracking-[0.2em] text-accent/80 absolute bottom-full mb-3 whitespace-nowrap left-1/2 -translate-x-1/2 pointer-events-none${item.value.includes('@') ? '' : ' uppercase'}`}
                       >
                         {item.action === 'copy' && copied ? 'Copied!' : item.value}
                       </motion.span>
@@ -302,7 +269,7 @@ const Footer = () => {
         </div>
 
         <p className="mt-24 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-muted">
-          &copy; {new Date().getFullYear()} Renu Alias
+          &copy; Renu Alias
         </p>
       </div>
     </motion.section>

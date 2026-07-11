@@ -15,14 +15,14 @@ const milestones = [
     description: 'Attested CEFR C2 level on the Cambridge LinguaSkill Business examination, demonstrating mastery-level proficiency in professional English communication.'
   },
   {
-    title: 'AI Systems Sprint',
-    date: '2024',
-    description: 'Designed a retrieval-augmented workflow for smarter decision-making in enterprise apps.'
+    title: "GSSoC '26 Contributor",
+    date: '2026',
+    description: 'GirlScript Summer of Code — contributed to open-source projects under the Open Source Track, collaborating with maintainers and shipping real-world features.'
   },
   {
-    title: 'Open Source Contributor',
-    date: '2023',
-    description: 'Published reusable tools for React and cloud automation with a focus on reliability and performance.'
+    title: "SSoC '26 Contributor",
+    date: '2026',
+    description: 'Social Summer of Code — actively contributed to community-driven open-source initiatives, building and improving tools for social impact.'
   }
 ];
 

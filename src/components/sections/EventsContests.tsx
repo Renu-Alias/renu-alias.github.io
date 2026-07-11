@@ -11,8 +11,29 @@ const events = [
     hasCert: true
   },
   {
+    type: 'Coding Contest',
+    name: 'DSArena Coding Contest',
+    date: '2025',
+    description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
+    hasCert: false
+  },
+  {
+    type: 'Coding Contest',
+    name: 'Ode to Code',
+    date: '2026',
+    description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
+    hasCert: false
+  },
+  {
     type: 'Open Source',
     name: 'GirlScript Summer of Code',
+    date: '2026',
+    description: 'Attended talks on distributed systems, edge computing, and AI infrastructure from industry leaders across India.',
+    hasCert: false
+  },
+  {
+    type: 'Open Source',
+    name: 'Social Summer of Code',
     date: '2026',
     description: 'Attended talks on distributed systems, edge computing, and AI infrastructure from industry leaders across India.',
     hasCert: false
@@ -24,24 +45,18 @@ const events = [
     description: 'Hands-on workshop covering Docker orchestration, Kubernetes cluster management, and CI/CD pipeline deployment strategies.',
     hasCert: true
   },
+  
   {
-    type: 'Coding Contest',
-    name: 'DSArena Coding Contest',
+    type: 'Contest',
+    name: 'IEDC OneTank Event - Pre Event',
     date: '2025',
-    description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
-    hasCert: false
+    description: 'Deep-dive workshop on transformer architectures, fine-tuning LLMs, and deploying models to production endpoints.',
+    hasCert: true
   },
   {
-    type: 'Coding Contest',
-    name: 'Ode to Code',
-    date: '2025',
-    description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
-    hasCert: false
-  },
-  {
-    type: 'Workshop',
-    name: 'AI/ML Intensive',
-    date: '2024',
+    type: 'Event',
+    name: 'Dev Summit',
+    date: '2026',
     description: 'Deep-dive workshop on transformer architectures, fine-tuning LLMs, and deploying models to production endpoints.',
     hasCert: true
   }
@@ -125,7 +140,7 @@ const EventsContests = () => {
               className="event-card flex-shrink-0 w-[85vw] max-w-[380px]"
             >
               <div className="group relative h-full rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.04] hover:-translate-y-1">
-                <span className="absolute right-5 top-4 font-mono text-[3rem] font-bold leading-none text-white/[0.07] select-none pointer-events-none">
+                <span className="absolute right-5 top-4 font-mono text-[1.25rem] font-bold leading-none text-white/[0.07] select-none pointer-events-none">
                   {event.date}
                 </span>
 
