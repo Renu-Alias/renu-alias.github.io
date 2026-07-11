@@ -8,35 +8,35 @@ const events = [
     name: 'Nexus AI Hackathon',
     date: '2026',
     description: 'A 16-hour hackathon focused on shipping production-ready applications with real-time collaboration and cross-functional team building.',
-    hasCert: true
+    hasCert: false
   },
   {
     type: 'Coding Contest',
     name: 'DSArena Coding Contest',
     date: '2025',
     description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
-    hasCert: false
+    hasCert: true
   },
   {
     type: 'Coding Contest',
     name: 'Ode to Code',
     date: '2026',
     description: 'Competitive debugging event with real-world codebase scenarios, time-constrained regression fixes, and peer review rounds.',
-    hasCert: false
+    hasCert: true
   },
   {
     type: 'Open Source',
     name: 'GirlScript Summer of Code',
     date: '2026',
     description: 'Attended talks on distributed systems, edge computing, and AI infrastructure from industry leaders across India.',
-    hasCert: false
+    hasCert: true
   },
   {
     type: 'Open Source',
     name: 'Social Summer of Code',
     date: '2026',
     description: 'Attended talks on distributed systems, edge computing, and AI infrastructure from industry leaders across India.',
-    hasCert: false
+    hasCert: true
   },
   {
     type: 'Event',
@@ -51,7 +51,7 @@ const events = [
     name: 'IEDC OneTank Event - Pre Event',
     date: '2025',
     description: 'Deep-dive workshop on transformer architectures, fine-tuning LLMs, and deploying models to production endpoints.',
-    hasCert: true
+    hasCert: false
   },
   {
     type: 'Event',
