@@ -11,7 +11,7 @@ const events = [
     hasCert: true
   },
   {
-    type: 'Open Source Contribution',
+    type: 'Open Source',
     name: 'GirlScript Summer of Code',
     date: '2026',
     description: 'Attended talks on distributed systems, edge computing, and AI infrastructure from industry leaders across India.',

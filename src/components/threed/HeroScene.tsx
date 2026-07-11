@@ -58,7 +58,7 @@ function DotField({ count = 400 }) {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.035} color="#F5F5F5" transparent opacity={0.22} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.04} color="#F5F5F5" transparent opacity={0.35} sizeAttenuation depthWrite={false} />
     </points>
   );
 }

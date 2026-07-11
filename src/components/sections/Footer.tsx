@@ -12,6 +12,23 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
 };
 
+const nodes = [
+  { cx: 180, cy: 100, delay: 0 },
+  { cx: 500, cy: 380, delay: 1.2 },
+  { cx: 820, cy: 100, delay: 2.4 }
+];
+
+const lines = [
+  { x1: 180, y1: 100, x2: 500, y2: 380, delay: 0 },
+  { x1: 500, y1: 380, x2: 820, y2: 100, delay: 0.6 },
+  { x1: 180, y1: 100, x2: 820, y2: 100, delay: 1.2 }
+];
+
+const dashAnim = {
+  animate: { strokeDashoffset: [-24, 0] },
+  transition: { duration: 1.8, repeat: Infinity, ease: 'linear' }
+};
+
 const Footer = () => (
   <motion.section
     id="contact"
@@ -27,6 +44,35 @@ const Footer = () => (
       animate={{ scale: [1, 1.06, 1], opacity: [0.8, 1, 0.8] }}
       transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
     />
+
+    {/* Signal nodes constellation */}
+    <motion.svg
+      className="pointer-events-none absolute inset-0 z-[1] h-full w-full"
+      viewBox="0 0 1000 500"
+      preserveAspectRatio="xMidYMid slice"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5, delay: 0.3 }}
+    >
+      {lines.map((l, i) => (
+        <motion.line
+          key={i}
+          x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+          stroke="#F5F5F5" strokeWidth="1" strokeDasharray="3 6"
+          opacity="0.12"
+          {...dashAnim}
+        />
+      ))}
+      {nodes.map((n, i) => (
+        <motion.circle
+          key={i}
+          cx={n.cx} cy={n.cy} r="3.5"
+          fill="#E63946" opacity="0.5"
+          animate={{ r: [3.5, 5, 3.5], opacity: [0.4, 0.75, 0.4] }}
+          transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: n.delay }}
+        />
+      ))}
+    </motion.svg>
 
     <div className="relative z-10 mx-auto max-w-4xl text-center">
       <h2 className="font-display text-display-section font-bold text-primary">
