@@ -3,8 +3,8 @@ import { useRef, useMemo, useEffect, type RefObject } from 'react';
 import * as THREE from 'three';
 import { mouse, scrollState } from './shared';
 
-const WHITE_COUNT = 4000;
-const RED_COUNT = 800;
+const WHITE_COUNT = 2500;
+const RED_COUNT = 500;
 
 /* ---- White particles (background atmosphere) ---- */
 function WhiteParticles() {
@@ -34,7 +34,7 @@ function WhiteParticles() {
       const t = (i / WHITE_COUNT) * Math.PI * 2;
       const phi = Math.acos(2 * ((i % 600) / 600) - 1);
       const baseR = 1.2 + (i % 10) * 0.4;
-      const spread = 1 + progress * 3;
+      const spread = 1 + progress * 5;
       const r = baseR * spread;
       const wave = Math.sin(t * 3 + clock.getElapsedTime() * 0.4 + progress * 6) * 0.4 * progress;
       array[i * 3] = r * Math.sin(phi + wave) * Math.cos(t + phase);
@@ -42,8 +42,8 @@ function WhiteParticles() {
       array[i * 3 + 2] = r * Math.cos(phi + wave + phase * 0.4);
     }
     attr.needsUpdate = true;
-    ref.current.rotation.x = clock.getElapsedTime() * 0.04 + mouse.y * 0.05;
-    ref.current.rotation.y = clock.getElapsedTime() * 0.06 + mouse.x * 0.05;
+    ref.current.rotation.x = clock.getElapsedTime() * 0.03 + mouse.y * 0.04;
+    ref.current.rotation.y = clock.getElapsedTime() * 0.05 + mouse.x * 0.04;
   });
 
   return (
@@ -51,7 +51,7 @@ function WhiteParticles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={WHITE_COUNT} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.035} color="#FFFFFF" transparent opacity={0.3} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.025} color="#FFFFFF" transparent opacity={0.2} sizeAttenuation depthWrite={false} />
     </points>
   );
 }
@@ -85,7 +85,7 @@ function RedParticles() {
       const t = (i / RED_COUNT) * Math.PI * 2;
       const phi = Math.acos(2 * ((i % 500) / 500) - 1);
       const baseR = 1.5 + (i % 8) * 0.45;
-      const spread = 1 + progress * 3;
+      const spread = 1 + progress * 5;
       const r = baseR * spread;
       const wave = Math.sin(t * 3 + clock.getElapsedTime() * 0.4 + progress * 6) * 0.4 * progress;
       array[i * 3] = r * Math.sin(phi + wave) * Math.cos(t + phase);
@@ -96,8 +96,8 @@ function RedParticles() {
 
     /* Pulse size/opacity on mouse activity */
     const mat = ref.current.material as THREE.PointsMaterial;
-    mat.size = 0.04 + activity * 0.03;
-    mat.opacity = 0.5 + activity * 0.35;
+    mat.size = 0.03 + activity * 0.025;
+    mat.opacity = 0.4 + activity * 0.35;
 
     ref.current.rotation.x = clock.getElapsedTime() * 0.03 + mouse.y * 0.06;
     ref.current.rotation.y = clock.getElapsedTime() * 0.05 + mouse.x * 0.06;

@@ -1,3 +1,4 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
 import Skills from '../components/sections/Skills';
@@ -6,20 +7,38 @@ import Certifications from '../components/sections/Certifications';
 import Achievements from '../components/sections/Achievements';
 import EventsContests from '../components/sections/EventsContests';
 import Footer from '../components/sections/Footer';
+import CyberBg from '../components/CyberBg';
 
-const HomePage = () => (
-  <>
-    <Hero />
-    <main>
-      <About />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Achievements />
-      <EventsContests />
-      <Footer />
-    </main>
-  </>
-);
+const HomePage = () => {
+  const { scrollYProgress } = useScroll();
+  const bgOpacity = useTransform(
+    scrollYProgress,
+    [0.18, 0.4, 0.85],
+    [1, 1, 0.05]
+  );
+
+  return (
+    <>
+      <Hero />
+      <main className="relative">
+        <motion.div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ opacity: bgOpacity }}
+        >
+          <CyberBg />
+        </motion.div>
+        <div className="relative z-10">
+          <About />
+          <Skills />
+          <Projects />
+          <Certifications />
+          <Achievements />
+          <EventsContests />
+          <Footer />
+        </div>
+      </main>
+    </>
+  );
+};
 
 export default HomePage;
