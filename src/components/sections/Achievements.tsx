@@ -54,13 +54,13 @@ const Achievements = () => {
       <SectionHeader num="05" title="Achievements" />
 
       <div ref={ref} className="relative">
-        <div className="absolute left-[1.125rem] top-8 bottom-8 w-px bg-white/10" />
+        <div className="absolute left-[0.875rem] sm:left-[1.125rem] top-8 bottom-8 w-px bg-white/10" />
         <motion.div
-          className="absolute left-[1.125rem] top-8 w-px origin-top bg-accent"
+          className="absolute left-[0.875rem] sm:left-[1.125rem] top-8 w-px origin-top bg-accent"
           style={{ scaleY: lineScale, boxShadow: '0 0 12px rgba(230,57,70,0.5)' }}
         />
 
-        <div className="relative space-y-12 pl-12">
+        <div className="relative space-y-8 sm:space-y-12 pl-8 sm:pl-12">
           {milestones.map((m, i) => (
             <motion.div
               key={m.title}
@@ -71,7 +71,7 @@ const Achievements = () => {
               viewport={{ once: true, amount: 0.15 }}
             >
               <div
-                className="absolute -left-[2.05rem] top-7 h-4 w-4 rounded-full bg-accent shadow-[0_0_12px_rgba(230,57,70,0.5)] node-pulse"
+                className="absolute -left-[1.125rem] sm:-left-[1.875rem] top-7 h-4 w-4 rounded-full bg-accent shadow-[0_0_12px_rgba(230,57,70,0.5)] node-pulse"
                 style={{ animationDelay: `${i * 0.4}s` }}
               />
               <Card>

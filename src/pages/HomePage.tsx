@@ -13,8 +13,8 @@ const HomePage = () => {
   const { scrollYProgress } = useScroll();
   const bgOpacity = useTransform(
     scrollYProgress,
-    [0.15, 0.5, 0.95],
-    [1, 0.75, 0.18]
+    [0.15, 0.45, 0.92],
+    [1, 0.8, 0.35]
   );
 
   return (

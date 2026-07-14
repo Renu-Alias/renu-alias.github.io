@@ -179,7 +179,7 @@ const Hero = () => (
       <div className="relative z-[70] pb-6 sm:pb-10">
         {/* Tagline */}
         <motion.p
-          className="font-mono text-[0.55rem] sm:text-xs uppercase tracking-[0.25em] text-muted text-center leading-relaxed"
+          className="font-mono text-[0.6rem] sm:text-xs uppercase tracking-[0.25em] text-muted text-center leading-relaxed"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
@@ -196,7 +196,7 @@ const Hero = () => (
         >
           <a
             href="#about"
-            className="inline-block rounded-full bg-accent px-7 py-2.5 sm:px-8 sm:py-3 font-mono text-[0.55rem] sm:text-xs uppercase tracking-[0.25em] text-white shadow-[0_0_16px_rgba(230,57,70,0.25)] transition-all duration-400 hover:bg-accent/90 hover:shadow-[0_0_28px_rgba(230,57,70,0.5)] active:scale-95"
+            className="inline-block rounded-full bg-accent px-7 py-2.5 sm:px-8 sm:py-3 font-mono text-[0.6rem] sm:text-xs uppercase tracking-[0.25em] text-white shadow-[0_0_16px_rgba(230,57,70,0.25)] transition-all duration-400 hover:bg-accent/90 hover:shadow-[0_0_28px_rgba(230,57,70,0.5)] active:scale-95"
           >
             Explore Work
           </a>
@@ -210,15 +210,15 @@ const Hero = () => (
           transition={{ duration: 1.2, delay: 3, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="text-center">
-            <p className="font-mono text-[0.5rem] sm:text-label text-accent">Location</p>
-            <p className="font-mono text-[0.55rem] sm:text-xs uppercase tracking-[0.15em] text-primary/80 mt-0.5">
+            <p className="font-mono text-[0.55rem] sm:text-label text-accent">Location</p>
+            <p className="font-mono text-[0.6rem] sm:text-xs uppercase tracking-[0.15em] text-primary/80 mt-0.5">
               Kochi, India
             </p>
           </div>
           <div className="h-8 w-px bg-white/10" />
           <div className="text-center">
-            <p className="font-mono text-[0.5rem] sm:text-label text-accent">Discipline</p>
-            <p className="font-mono text-[0.55rem] sm:text-xs uppercase tracking-[0.15em] text-primary/80 mt-0.5">
+            <p className="font-mono text-[0.55rem] sm:text-label text-accent">Discipline</p>
+            <p className="font-mono text-[0.6rem] sm:text-xs uppercase tracking-[0.15em] text-primary/80 mt-0.5">
               Full-Stack // AI
             </p>
           </div>

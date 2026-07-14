@@ -30,7 +30,9 @@ body {
   color: #ffffff;
 }
 
-button, a { cursor: none; }
+@media (hover: hover) and (pointer: fine) {
+  button, a { cursor: none; }
+}
 
 .scroll-indicator-pulse {
   animation: pulse-line 2.5s ease-in-out infinite;

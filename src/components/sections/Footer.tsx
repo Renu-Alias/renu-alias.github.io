@@ -79,17 +79,29 @@ const Footer = () => {
   return (
     <motion.section
       id="contact"
-      className="relative overflow-hidden mx-auto max-w-container px-4 sm:px-6 py-section"
+      className="relative overflow-hidden mx-auto max-w-container px-4 sm:px-6 pt-section pb-8 sm:pb-10 md:pb-12"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
     >
       <motion.div
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full"
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[250px] w-[250px] sm:h-[350px] sm:w-[350px] md:h-[500px] md:w-[500px] rounded-full"
         style={{ background: 'radial-gradient(circle,rgba(230,57,70,0.12)_0%,transparent_60%)' }}
         animate={{ scale: [1, 1.06, 1], opacity: [0.8, 1, 0.8] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="pointer-events-none absolute left-[15%] top-[65%] h-[180px] w-[180px] sm:h-[240px] sm:w-[240px] md:h-[300px] md:w-[300px] rounded-full"
+        style={{ background: 'radial-gradient(circle,rgba(230,57,70,0.06)_0%,transparent_60%)' }}
+        animate={{ x: [0, 15, -8, 0], y: [0, -10, 8, 0], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="pointer-events-none absolute right-[20%] bottom-[10%] h-[120px] w-[120px] sm:h-[160px] sm:w-[160px] md:h-[200px] md:w-[200px] rounded-full"
+        style={{ background: 'radial-gradient(circle,rgba(230,57,70,0.04)_0%,transparent_60%)' }}
+        animate={{ x: [0, -12, 6, 0], y: [0, 8, -6, 0], opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
@@ -105,7 +117,7 @@ const Footer = () => {
 
         {/* Contact links */}
         <div className="mt-16 md:mt-20">
-          <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-start gap-10 sm:gap-12 md:gap-20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 justify-items-center">
             {contacts.map((item) => (
               <div
                 key={item.label}
@@ -134,7 +146,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <p className="mt-24 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-muted">
+        <p className="mt-12 sm:mt-16 md:mt-24 font-mono text-[0.6rem] uppercase tracking-[0.3em] text-muted">
           &copy; Renu Alias
         </p>
       </div>

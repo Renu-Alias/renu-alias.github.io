@@ -108,7 +108,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className="font-mono text-lg uppercase tracking-[0.3em] text-primary/80 transition hover:text-primary"
+                  className="font-mono text-base sm:text-lg uppercase tracking-[0.2em] sm:tracking-[0.3em] text-primary/80 transition hover:text-primary"
                 >
                   {item.label}
                 </motion.a>

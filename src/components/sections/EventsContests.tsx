@@ -141,7 +141,7 @@ const EventsContests = () => {
           onMouseLeave={() => setIsHovered(false)}
           onTouchStart={() => setIsHovered(true)}
           onTouchEnd={() => setIsHovered(false)}
-          className="flex gap-5 overflow-x-auto py-4"
+          className="flex gap-5 overflow-x-auto py-4 snap-x snap-mandatory"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {allEvents.map((event, i) => (
@@ -152,7 +152,7 @@ const EventsContests = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
-              className="event-card flex-shrink-0 w-[80vw] sm:w-[70vw] md:w-[55vw] lg:w-[45vw] xl:w-[380px]"
+              className="event-card flex-shrink-0 w-[80vw] sm:w-[70vw] md:w-[55vw] lg:w-[42vw] xl:w-[36vw] 2xl:w-[420px] snap-start"
             >
               <div className="group relative h-full rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-sm transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.04] hover:-translate-y-1">
                 <span className="absolute right-5 top-4 font-mono text-[2rem] font-bold leading-none text-white/[0.07] select-none pointer-events-none">
