@@ -60,10 +60,10 @@ body {
 
 .skill-dot-matrix {
   background-image:
-    radial-gradient(circle, rgba(255, 26, 60, 0.22) 0 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(255, 26, 60, 0.13), transparent 58%);
-  background-size: 28px 28px, 100% 100%;
-  mask-image: radial-gradient(ellipse at center, black 0%, black 48%, transparent 78%);
+    radial-gradient(circle, rgba(255, 26, 60, 0.08) 0 0.8px, transparent 1px),
+    radial-gradient(circle at center, rgba(255, 26, 60, 0.03), transparent 60%);
+  background-size: 36px 36px, 100% 100%;
+  mask-image: radial-gradient(ellipse at center, black 0%, black 42%, transparent 76%);
 }
 
 .skill-node {

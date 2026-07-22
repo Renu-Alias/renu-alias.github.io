@@ -3,8 +3,8 @@ import { useRef, useMemo, useEffect, type RefObject } from 'react';
 import * as THREE from 'three';
 import { mouse, scrollState } from './shared';
 
-const WHITE_COUNT = 2500;
-const RED_COUNT = 500;
+const WHITE_COUNT = 1900;
+const RED_COUNT = 320;
 
 /* ---- White particles (background atmosphere) ---- */
 function WhiteParticles() {
@@ -51,7 +51,7 @@ function WhiteParticles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={WHITE_COUNT} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.025} color="#FFFFFF" transparent opacity={0.2} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.022} color="#FFFFFF" transparent opacity={0.15} sizeAttenuation depthWrite={false} />
     </points>
   );
 }
@@ -96,8 +96,8 @@ function RedParticles() {
 
     /* Pulse size/opacity on mouse activity */
     const mat = ref.current.material as THREE.PointsMaterial;
-    mat.size = 0.03 + activity * 0.025;
-    mat.opacity = 0.4 + activity * 0.35;
+    mat.size = 0.024 + activity * 0.018;
+    mat.opacity = 0.28 + activity * 0.24;
 
     ref.current.rotation.x = clock.getElapsedTime() * 0.03 + mouse.y * 0.06;
     ref.current.rotation.y = clock.getElapsedTime() * 0.05 + mouse.x * 0.06;
@@ -108,7 +108,7 @@ function RedParticles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={RED_COUNT} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.03} color="#E63946" transparent opacity={0.4} sizeAttenuation depthWrite={false} />
+      <pointsMaterial size={0.024} color="#E63946" transparent opacity={0.28} sizeAttenuation depthWrite={false} />
     </points>
   );
 }

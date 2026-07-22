@@ -24,6 +24,9 @@ interface Square {
   phase: number;
   speed: number;
   vx: number;
+  vy: number;
+  drift: number;
+  mouseWeight: number;
 }
 
 interface Ring {
@@ -49,6 +52,8 @@ interface Ember {
   phase: number;
   speed: number;
   vx: number;
+  mouseWeight: number;
+  driftFreq: number;
 }
 
 const CyberBg = () => {
@@ -140,8 +145,11 @@ const CyberBg = () => {
             y: sy,
             size: rand(2.5, 5),
             phase: rand(0, Math.PI * 2),
-            speed: rand(0.0015, 0.006),
-            vx: rand(-0.01, 0.01),
+            speed: rand(0.0008, 0.0045),
+            vx: rand(-0.018, 0.018),
+            vy: rand(-0.014, 0.014),
+            drift: rand(0.6, 2.4),
+            mouseWeight: rand(0.05, 0.55),
           });
         }
       }
@@ -184,6 +192,8 @@ const CyberBg = () => {
           phase: rand(0, Math.PI * 2),
           speed: rand(0.0015, 0.005),
           vx: rand(-0.004, 0.004),
+          mouseWeight: rand(0.4, 2.0),
+          driftFreq: rand(0.4, 2.5),
         });
       }
 
@@ -283,10 +293,12 @@ const CyberBg = () => {
         sq.phase += sq.speed;
 
         // Gentle random wander — each square drifts independently
-        if (Math.random() < 0.003) sq.vx = rand(-0.012, 0.012);
-        const driftY = Math.sin(sq.phase * 1.7) * 0.012;
-        sq.y += driftY + rand(-0.002, 0.002);
-        sq.x += sq.vx + mx * 0.6;
+        if (Math.random() < 0.006) sq.vx = rand(-0.024, 0.024);
+        if (Math.random() < 0.006) sq.vy = rand(-0.018, 0.018);
+        const driftX = Math.cos(sq.phase * sq.drift) * 0.024;
+        const driftY = Math.sin(sq.phase * (sq.drift + 0.7)) * 0.024;
+        sq.y += sq.vy + driftY + rand(-0.004, 0.004) + my * sq.mouseWeight * 0.15;
+        sq.x += sq.vx + driftX + mx * sq.mouseWeight * 1.3;
 
         // Wrap instead of reset — seamless loop
         if (sq.y < -30) sq.y = h + rand(0, 40);
@@ -295,7 +307,7 @@ const CyberBg = () => {
         if (sq.x > w * 0.45) sq.x = rand(-20, 10);
 
         // Mild opacity shimmer (never fully fades)
-        const sqAlpha = 0.25 + Math.sin(sq.phase * 0.6 + sq.size) * 0.08;
+        const sqAlpha = 0.18 + Math.sin(sq.phase * 0.6 + sq.size) * 0.06;
 
         const glowSize = sq.size * 2;
         c.fillStyle = `rgba(255,59,77,${sqAlpha * 0.02})`;
@@ -312,8 +324,9 @@ const CyberBg = () => {
       for (const em of embers) {
         em.phase += em.speed;
         const emAlpha = (Math.sin(em.phase) * 0.5 + 0.5) * 0.12;
-        em.y -= 0.008 + em.speed * 2;
-        em.x += em.vx + mx * 1.5;
+        em.y -= 0.02 + em.speed * 2.5;
+        // Organic horizontal swaying + random mouse response
+        em.x += em.vx + Math.sin(em.phase * em.driftFreq) * 0.08 + mx * em.mouseWeight;
 
         if (em.y < -30) {
           em.x = rand(0, w * 0.35);
