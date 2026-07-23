@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 const RED = '#ff3b4d';
 const DARK = '#2b2b2b';
-const BG = '#050506';
+const BG = '#050505';
 
 function rand(min: number, max: number) {
   return Math.random() * (max - min) + min;

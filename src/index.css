@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background: linear-gradient(to bottom, #050505, #0a0a0a);
+  background: #050505;
   color: #F5F5F5;
   cursor: none;
   min-height: 100vh;
