@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const LERP = 0.22;
-const DOT_LERP = 0.45;
+const LERP = 0.35;
+const DOT_LERP = 0.65;
 const MAGNET_STRENGTH = 0.35;
 const MAX_PULL = 12;
 const interactiveSelectors = ['a', 'button', 'input', 'textarea', 'select', '[role="button"]', '[data-cursor-text]'];
