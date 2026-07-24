@@ -79,7 +79,7 @@ const Footer = () => {
   return (
     <motion.section
       id="contact"
-      className="relative mx-auto flex min-h-screen w-full max-w-container flex-col items-center justify-center px-4 py-16 sm:px-6"
+      className="relative mx-auto flex min-h-screen w-full max-w-container flex-col items-center justify-center px-4 sm:px-6"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
